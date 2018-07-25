@@ -12,6 +12,8 @@ import com.weather.android.application.WeatherApplication;
 import com.weather.android.to.*;
 import com.weather.android.util.*;
 
+import java.text.DecimalFormat;
+
 public class WeatherDetailsActivity extends BaseActivity {
 	private TextView textViewCityName, textViewCityTemperature;
 	private Button buttonBack;
@@ -74,13 +76,52 @@ public class WeatherDetailsActivity extends BaseActivity {
 		} 
 	}
 
+	private TemperatureTO convertFromKelvinToFahrenheitAndCelcius(Double kelvinTemp){
+        //Conversion temperature formulas following below:
+        //T(°F) = T(K) × 9/5 - 459.67
+        //T(°C) = T(K) - 273.15
+	    Double  fahrenheitTemp = (kelvinTemp*9/5) - 459.67,
+                celsiusTemp = kelvinTemp - 273.15;
+
+        DecimalFormat df = new DecimalFormat("##.#");
+
+        TemperatureTO temperatureData = new TemperatureTO();
+        temperatureData.setFormattedCelciusTemp(df.format(celsiusTemp));
+        temperatureData.setFormattedFahrenheitTemp(df.format(fahrenheitTemp));
+
+        return temperatureData;
+    }
 
 	private void populateWeatherDetails(){
 		//set the fields text
-		textViewCityName.setText(WeatherApplication.getWeather().getName());
+		String  formattedCityName = WeatherApplication.getWeather().getName(),
+                latitude = String.valueOf(WeatherApplication.getWeather().getCoord().getLat()),
+                longtitude = String.valueOf(WeatherApplication.getWeather().getCoord().getLon());
 
-		String stringCityTemperature = String.valueOf(WeatherApplication.getWeather().getMain().getTemp()) + " °F";
-		textViewCityTemperature.setText(stringCityTemperature);
+        formattedCityName += " (" + latitude + ", " + longtitude + ")";
+
+        textViewCityName.setText(formattedCityName);
+
+        TemperatureTO   cityTemp = new TemperatureTO(),
+                        cityMinTemp = new TemperatureTO(),
+                        cityMaxTemp = new TemperatureTO();
+
+        Double  kelvinCityTemp = WeatherApplication.getWeather().getMain().getTemp(),
+                kelvinCityMinTemp = WeatherApplication.getWeather().getMain().getTemp_min(),
+                kelvinCityMaxTemp = WeatherApplication.getWeather().getMain().getTemp_max();
+
+        cityTemp = convertFromKelvinToFahrenheitAndCelcius(kelvinCityTemp);
+        cityMinTemp = convertFromKelvinToFahrenheitAndCelcius(kelvinCityMinTemp);
+        cityMaxTemp = convertFromKelvinToFahrenheitAndCelcius(kelvinCityMaxTemp);
+
+        String formattedCityTemp =  cityTemp.getFormattedFahrenheitTemp()
+                                    + " °F (min: " + cityMinTemp.getFormattedFahrenheitTemp() + ", "
+                                    + "max: " + cityMaxTemp.getFormattedFahrenheitTemp() + ")/\r\n"
+                                    + cityTemp.getFormattedCelciusTemp()
+                                    + " °C (min: " + cityMinTemp.getFormattedCelciusTemp() + ", "
+                                    + "max: " + cityMaxTemp.getFormattedCelciusTemp() + ")";
+
+		textViewCityTemperature.setText(formattedCityTemp);
 	}
 
 	/** Called when the activity is first created. */

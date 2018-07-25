@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Wind {
-	 private float speed;
-	 private float deg;
-	 private float gust;
+	 private Double speed;
+	 private Integer deg;
+     private Double gust;
 }

@@ -17,14 +17,14 @@ public class WeatherTO
 	 ArrayList < Object > weather = new ArrayList < Object > ();
 	 private String base;
 	 Main main;
-	 private float visibility;
+	 private Integer visibility;
 	 Wind wind;
      Clouds clouds;
-	 private float dt;
+	 private Integer dt;
 	 Sys sys;
-	 private float id;
+	 private Integer id;
 	 private String name;
-	 private float cod;
+	 private Integer cod;
 
 	public void clearWeatherDetails()
 	{

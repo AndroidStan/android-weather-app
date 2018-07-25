@@ -4,10 +4,10 @@ import lombok.Data;
 
 @Data
 public class Sys {
-	 private float type;
-	 private float id;
-	 private float message;
+	 private Integer type;
+	 private Integer id;
+	 private Double message;
 	 private String country;
-	 private float sunrise;
-	 private float sunset;
+	 private Integer sunrise;
+	 private Integer sunset;
 }
