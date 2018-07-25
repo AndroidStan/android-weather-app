@@ -55,6 +55,26 @@
 
          </LinearLayout>
 
+		 <LinearLayout
+			 android:layout_width="match_parent"
+			 android:layout_height="wrap_content"
+			 android:orientation="horizontal"
+			 android:padding="5dp">
+			 <TextView
+				 android:id="@+id/weatherLabel"
+				 style="@style/Small.Bold"
+				 android:layout_width="wrap_content"
+				 android:layout_height="wrap_content"
+				 android:text="@string/weatherLabel" />
+
+			 <TextView android:id="@+id/weather"
+				 style="@style/Small"
+				 android:layout_width="wrap_content"
+				 android:layout_height="wrap_content"
+				 android:paddingLeft="10dip" />
+
+		 </LinearLayout>
+
 	 </LinearLayout>
 
     <Button

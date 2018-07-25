@@ -104,7 +104,7 @@ public class WeatherApplication extends Application {
 		weatherDetails = weather;
 	}
 
-	public static WeatherTO getWeather(){
+	public static WeatherTO getWeatherDetails(){
 		return weatherDetails;
 	}
 

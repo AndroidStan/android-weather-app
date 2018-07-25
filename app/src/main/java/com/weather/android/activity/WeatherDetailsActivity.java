@@ -15,7 +15,9 @@ import com.weather.android.util.*;
 import java.text.DecimalFormat;
 
 public class WeatherDetailsActivity extends BaseActivity {
-	private TextView textViewCityName, textViewCityTemperature;
+	private TextView 	textViewCityName,
+						textViewCityTemperature,
+						textViewWeather;
 	private Button buttonBack;
 	
 	private class AsyncParseTask extends AsyncTask <String,Integer,ErrorMessageTO> 
@@ -65,7 +67,7 @@ public class WeatherDetailsActivity extends BaseActivity {
 				createDialogAndHandleTechnicalExceptionAndFinishActivity(errorMessage);
 			else
 			{
-				if(WeatherApplication.getWeather() == null)
+				if(WeatherApplication.getWeatherDetails() == null)
 				{
 					showDialogAndFinishActivity(getText(R.string.no_weather_title).toString(),getText(R.string.no_results).toString());
 					return;
@@ -94,9 +96,9 @@ public class WeatherDetailsActivity extends BaseActivity {
 
 	private void populateWeatherDetails(){
 		//set the fields text
-		String  formattedCityName = WeatherApplication.getWeather().getName(),
-                latitude = String.valueOf(WeatherApplication.getWeather().getCoord().getLat()),
-                longtitude = String.valueOf(WeatherApplication.getWeather().getCoord().getLon());
+		String  formattedCityName = WeatherApplication.getWeatherDetails().getName(),
+                latitude = String.valueOf(WeatherApplication.getWeatherDetails().getCoord().getLat()),
+                longtitude = String.valueOf(WeatherApplication.getWeatherDetails().getCoord().getLon());
 
         formattedCityName += " (" + latitude + ", " + longtitude + ")";
 
@@ -106,9 +108,9 @@ public class WeatherDetailsActivity extends BaseActivity {
                         cityMinTemp = new TemperatureTO(),
                         cityMaxTemp = new TemperatureTO();
 
-        Double  kelvinCityTemp = WeatherApplication.getWeather().getMain().getTemp(),
-                kelvinCityMinTemp = WeatherApplication.getWeather().getMain().getTemp_min(),
-                kelvinCityMaxTemp = WeatherApplication.getWeather().getMain().getTemp_max();
+        Double  kelvinCityTemp = WeatherApplication.getWeatherDetails().getMain().getTemp(),
+                kelvinCityMinTemp = WeatherApplication.getWeatherDetails().getMain().getTemp_min(),
+                kelvinCityMaxTemp = WeatherApplication.getWeatherDetails().getMain().getTemp_max();
 
         cityTemp = convertFromKelvinToFahrenheitAndCelcius(kelvinCityTemp);
         cityMinTemp = convertFromKelvinToFahrenheitAndCelcius(kelvinCityMinTemp);
@@ -122,6 +124,24 @@ public class WeatherDetailsActivity extends BaseActivity {
                                     + "max: " + cityMaxTemp.getFormattedCelciusTemp() + ")";
 
 		textViewCityTemperature.setText(formattedCityTemp);
+
+		String weatherDetails = WeatherApplication.getWeatherDetails().getWeather().get(0).getMain();
+		weatherDetails += ": " + WeatherApplication.getWeatherDetails().getWeather().get(0).getDescription();
+
+		Integer pressure = WeatherApplication.getWeatherDetails().getMain().getPressure(),
+                humidity = WeatherApplication.getWeatherDetails().getMain().getHumidity(),
+                visibility = WeatherApplication.getWeatherDetails().getVisibility(),
+                cloudiness = WeatherApplication.getWeatherDetails().getClouds().getAll();
+
+		Double windSpeed = WeatherApplication.getWeatherDetails().getWind().getSpeed();
+
+        weatherDetails += "\r\nPressure: " + pressure.toString() + " hPa"
+                        + "\r\nHumidity: " + humidity.toString() + " %"
+                        + "\r\nVisibility: " + visibility.toString() + " meters"
+                        + "\r\nCloudiness: " + cloudiness.toString() + " %"
+                        + "\r\nWind Speed: " + windSpeed.toString() + " m/s";
+
+		textViewWeather.setText(weatherDetails);
 	}
 
 	/** Called when the activity is first created. */
@@ -133,6 +153,7 @@ public class WeatherDetailsActivity extends BaseActivity {
 
         textViewCityName = (TextView) findViewById(R.id.cityName);
         textViewCityTemperature = (TextView) findViewById(R.id.cityTemperature);
+		textViewWeather = (TextView) findViewById(R.id.weather);;
 
         buttonBack = (Button) findViewById(R.id.button_back);
 
