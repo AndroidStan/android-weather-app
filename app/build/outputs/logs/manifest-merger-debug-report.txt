@@ -1,0 +1,155 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:2:1-35:12
+MERGED from [android.arch.persistence.room:runtime:1.1.1] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\931a39c1b55cd41a566c6a0b2fa40820\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.persistence:db-framework:1.1.1] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\db-framework-1.1.1.aar\3d698bee2e835f22982baf309240f687\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.persistence:db:1.1.1] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\db-1.1.1.aar\deb7304b3d7bf6d201860fa3bb9da573\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\d5d7d00bb7f2dc52179e987c32afcee1\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\9a8a10a96c264f52b232348d58f2d33a\AndroidManifest.xml:17:1-31:12
+MERGED from [com.android.support:support-compat:26.1.0] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\0d91f22f4550c843f07032d267688a4c\AndroidManifest.xml:17:1-31:12
+INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:2:1-35:12
+INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:2:1-35:12
+	package
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:3:5-34
+		INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml
+	android:versionName
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:5:5-30
+		INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:2:11-69
+	android:versionCode
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:4:5-28
+		INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml
+uses-sdk
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:6:5-73
+INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:6:5-73
+INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:6:5-73
+MERGED from [android.arch.persistence.room:runtime:1.1.1] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\931a39c1b55cd41a566c6a0b2fa40820\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.persistence.room:runtime:1.1.1] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\931a39c1b55cd41a566c6a0b2fa40820\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.persistence:db-framework:1.1.1] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\db-framework-1.1.1.aar\3d698bee2e835f22982baf309240f687\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.persistence:db-framework:1.1.1] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\db-framework-1.1.1.aar\3d698bee2e835f22982baf309240f687\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.persistence:db:1.1.1] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\db-1.1.1.aar\deb7304b3d7bf6d201860fa3bb9da573\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.persistence:db:1.1.1] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\db-1.1.1.aar\deb7304b3d7bf6d201860fa3bb9da573\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\d5d7d00bb7f2dc52179e987c32afcee1\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.1] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\runtime-1.1.1.aar\d5d7d00bb7f2dc52179e987c32afcee1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\9a8a10a96c264f52b232348d58f2d33a\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\9a8a10a96c264f52b232348d58f2d33a\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:26.1.0] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\0d91f22f4550c843f07032d267688a4c\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-compat:26.1.0] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\0d91f22f4550c843f07032d267688a4c\AndroidManifest.xml:21:5-23:58
+INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:6:5-73
+INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:6:5-73
+	tools:overrideLibrary
+		ADDED from [com.android.support:support-core-utils:26.1.0] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\9a8a10a96c264f52b232348d58f2d33a\AndroidManifest.xml:23:9-58
+	android:targetSdkVersion
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:6:42-71
+		INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:6:15-41
+		INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml
+supports-screens
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:7:5-136
+	android:largeScreens
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:7:107-134
+	android:normalScreens
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:7:78-106
+	android:xlargeScreens
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:7:23-51
+	android:resizeable
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:7:52-77
+uses-feature#android.hardware.touchscreen
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:8:5-91
+	android:required
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:8:64-88
+	android:name
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:8:19-62
+uses-feature#android.hardware.location.gps
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:9:5-91
+	android:required
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:9:64-88
+	android:name
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:9:19-63
+uses-feature#android.hardware.location
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:10:5-87
+	android:required
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:10:60-84
+	android:name
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:10:19-59
+uses-feature#android.hardware.location.network
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:11:5-95
+	android:required
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:11:68-92
+	android:name
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:11:19-67
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:13:5-67
+	android:name
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:13:22-64
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:14:5-79
+	android:name
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:14:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:15:5-81
+	android:name
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:15:22-78
+application
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:17:5-34:19
+MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\9a8a10a96c264f52b232348d58f2d33a\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\9a8a10a96c264f52b232348d58f2d33a\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:26.1.0] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\0d91f22f4550c843f07032d267688a4c\AndroidManifest.xml:25:5-29:19
+MERGED from [com.android.support:support-compat:26.1.0] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\0d91f22f4550c843f07032d267688a4c\AndroidManifest.xml:25:5-29:19
+	android:label
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:20:9-41
+	android:icon
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:18:9-45
+	android:name
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:19:9-55
+activity#com.weather.android.activity.SplashScreenActivity
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:22:9-28:20
+	android:theme
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:23:13-60
+	android:name
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:22:19-64
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:24:13-27:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:25:17-69
+	android:name
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:25:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:26:17-77
+	android:name
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:26:27-74
+activity#com.weather.android.activity.HomeActivity
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:30:9-121
+	android:configChanges
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:30:57-118
+	android:name
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:30:19-56
+activity#com.weather.android.activity.WeatherDetailsActivity
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:31:9-131
+	android:configChanges
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:31:67-128
+	android:name
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:31:19-66
+uses-library#com.google.android.maps
+ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:33:9-64
+	android:name
+		ADDED from C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\AndroidManifest.xml:33:23-61
+meta-data#android.support.VERSION
+ADDED from [com.android.support:support-core-utils:26.1.0] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\9a8a10a96c264f52b232348d58f2d33a\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:26.1.0] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\0d91f22f4550c843f07032d267688a4c\AndroidManifest.xml:26:9-28:38
+MERGED from [com.android.support:support-compat:26.1.0] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\0d91f22f4550c843f07032d267688a4c\AndroidManifest.xml:26:9-28:38
+	android:value
+		ADDED from [com.android.support:support-core-utils:26.1.0] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\9a8a10a96c264f52b232348d58f2d33a\AndroidManifest.xml:28:13-35
+	android:name
+		ADDED from [com.android.support:support-core-utils:26.1.0] C:\Users\sdinev.WHGROUP\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\9a8a10a96c264f52b232348d58f2d33a\AndroidManifest.xml:27:13-51
