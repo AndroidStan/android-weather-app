@@ -22,7 +22,7 @@
             android:layout_marginBottom="10dip"
             android:layout_above="@+id/button_add_zip"/>
 
-        <Button
+		<Button
             android:id="@+id/button_add_zip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

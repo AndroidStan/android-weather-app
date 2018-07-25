@@ -68,13 +68,19 @@ public class WeatherDetailsActivity extends BaseActivity {
 					showDialogAndFinishActivity(getText(R.string.no_weather_title).toString(),getText(R.string.no_results).toString());
 					return;
 				}
-				//set the fields text
-                textViewCityName.setText(WeatherApplication.getWeather().getName());
 
-				String stringCityTemperature = String.valueOf(WeatherApplication.getWeather().getMain().getTemp()) + " °F";
-				textViewCityTemperature.setText(stringCityTemperature);
+				populateWeatherDetails();
 			}
 		} 
+	}
+
+
+	private void populateWeatherDetails(){
+		//set the fields text
+		textViewCityName.setText(WeatherApplication.getWeather().getName());
+
+		String stringCityTemperature = String.valueOf(WeatherApplication.getWeather().getMain().getTemp()) + " °F";
+		textViewCityTemperature.setText(stringCityTemperature);
 	}
 
 	/** Called when the activity is first created. */
