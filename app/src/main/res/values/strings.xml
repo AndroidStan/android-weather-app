@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!--  main -->
+     <string name="app_name">WeatherApp</string>
+     <string name="app_name_with_trade_mark">WeatherApp™</string>
+     <string name="app_url">http://www.weatherapp.com</string>
+     <string name="app_manufacturer">© 2012, Smart Mobile Solutions, Inc.</string>
+     <string name="app_manufacturer_url">http://www.smartmobilesolutions.com</string>
+     <string name="app_description">Weather tool for U.S.A</string>
+     <string name="app_support_email">support@weatherapp.com</string>
+    
+    <!-- global -->   
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="version">Version</string>
+
+    <string name="page">Page</string>
+    <string name="search">Search</string>
+    <string name="of">of</string>
+
+    <!-- menu -->
+    <string name="about">About</string>
+    <string name="feedback">Feedback</string>
+    <string name="share_with_friend">Share with Friend</string>
+    <string name="help">Help</string>
+    <string name="terms">Terms</string>
+    
+    <!-- activities -->
+    <string name="initializing">Initializing...</string>
+    <string name="splash_screen">SplashScreen</string>
+    <string name="parameters">Please enter the following parameters:</string>
+    <string name="location">Location:</string>
+    <string name="query">Query:</string>
+     
+    <!-- email -->
+    <string name="select_program">Select program:</string>
+	<string name="email_subject">I found %1$s app</string>
+	<string name="email_body">Hey, I just installed %1$s app on my phone. 
+	    It\'s %2$s. You can get it from </string>
+     
+	<!-- errors -->
+    <string name="technical_problem">Technical problem:</string>
+    <string name="server_data_failure">Server data failure!</string>
+    
+    <!-- progress dialog  strings -->
+    <string name="progress_title">Retrieving Weather Information</string>
+    <string name="progress_db_title">Retrieving Weather DB Information</string>
+    <string name="progress_text">Please wait &#8230;</string>
+
+    <string name="city_name">City Name:</string>
+    <string name="city_temperature">City Temperature:</string>
+    <string name="button_back_title">BACK</string>
+
+
+    <!-- Error messages -->
+    <string name="no_weather_title">Weather details not found</string>
+    <string name="no_results">Please try again later!</string>
+
+    <string name="no_weather_db_title">Weather DB</string>
+    <string name="no_db_results">Details not found!</string>
+
+    <string name="button_add_zip">ADD ZIP</string>
+        
+</resources>
+

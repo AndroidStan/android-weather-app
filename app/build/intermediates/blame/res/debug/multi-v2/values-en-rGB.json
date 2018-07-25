@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\Users\\sdinev.WHGROUP\\Downloads\\WeatherApp\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en-rGB\\values-en-rGB.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\sdinev.WHGROUP\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-26.1.0.aar\\0d91f22f4550c843f07032d267688a4c\\res\\values-en-rGB\\values-en-rGB.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        }
+    ]
+}

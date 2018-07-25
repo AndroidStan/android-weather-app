@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\assets"><file name="databases/USA_Cities.db" path="C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\main\assets\databases\USA_Cities.db"/></source><source path="C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\build\generated\assets\shaders\debug"/></dataSet><dataSet config="debug"><source path="C:\Users\sdinev.WHGROUP\Downloads\WeatherApp\app\src\debug\assets"/></dataSet></merger>

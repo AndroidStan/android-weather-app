@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources > 
+  
+<!-- text styles - black -->
+
+<style name="Mini">
+	<item name="android:textColor">@color/black</item>
+	<item name="android:textSize">@dimen/mini_size</item>
+	<item name="android:textStyle">normal</item>
+	<item name="android:layout_width">wrap_content</item>
+	<item name="android:layout_height">wrap_content</item>	
+</style>
+
+<style name="Mini.Bold">
+	<item name="android:textStyle">bold</item>	
+</style>
+
+<style name="Small">
+	<item name="android:textColor">@color/black</item>
+	<item name="android:textSize">@dimen/small_size</item>
+	<item name="android:textStyle">normal</item>
+	<item name="android:layout_width">wrap_content</item>
+	<item name="android:layout_height">wrap_content</item>		
+</style>
+
+<style name="Small.Bold" >
+	<item name="android:textStyle">bold</item>	
+</style>
+
+<style name="Medium">
+	<item name="android:textColor">@color/black</item>
+	<item name="android:textSize">@dimen/medium_size</item>
+	<item name="android:textStyle">normal</item>
+	<item name="android:layout_width">wrap_content</item>
+	<item name="android:layout_height">wrap_content</item>		
+</style>
+
+<style name="Medium.Bold">
+	<item name="android:textStyle">bold</item>	
+</style>
+
+<style name="Large">
+	<item name="android:textColor">@color/black</item>
+	<item name="android:textSize">@dimen/large_size</item>
+	<item name="android:textStyle">normal</item>
+	<item name="android:layout_width">wrap_content</item>
+	<item name="android:layout_height">wrap_content</item>		
+</style>
+
+<style name="Large.Bold">
+	<item name="android:textStyle">bold</item>	
+</style>
+
+<style name="XLarge">
+	<item name="android:textColor">@color/black</item>
+	<item name="android:textSize">@dimen/xlarge_size</item>
+	<item name="android:textStyle">normal</item>	
+	<item name="android:layout_width">wrap_content</item>
+	<item name="android:layout_height">wrap_content</item>	
+</style>
+
+<!-- text styles gray -->
+
+<style name="Mini.Gray" >
+	<item name="android:textColor">@color/gray_8</item>	
+</style>
+
+<style name="Mini.Gray.Bold" >
+	<item name="android:textStyle">bold</item>	
+</style>
+
+<style name="Small.Gray">
+	<item name="android:textColor">@color/gray_8</item>	
+</style>
+
+<style name="Small.Gray.Bold" >
+	<item name="android:textStyle">bold</item>	
+</style>
+
+<style name="Medium.Gray">
+	<item name="android:textColor">@color/gray_8</item>		
+</style>
+
+<style name="Medium.Gray.Bold" >
+	<item name="android:textStyle">bold</item>	
+</style>
+
+<style name="Large.Gray">
+	<item name="android:textColor">@color/gray_8</item>		
+</style>
+
+<style name="Large.Gray.Bold" >
+	<item name="android:textStyle">bold</item>	
+</style>
+
+<style name="XLarge.Gray">
+	<item name="android:textColor">@color/gray_8</item>		
+</style>
+
+<style name="XLarge.Gray.Bold" >
+	<item name="android:textStyle">bold</item>	
+</style>
+
+<!-- text styles white -->
+
+<style name="Mini.White" >
+	<item name="android:textColor">@color/white</item>	
+</style>
+
+<style name="Mini.White.Bold" >
+	<item name="android:textStyle">bold</item>	
+</style>
+
+<style name="Small.Blue">
+	<item name="android:textColor">@color/blue</item>	
+</style>
+
+<style name="Small.White">
+	<item name="android:textColor">@color/white</item>	
+</style>
+
+<style name="Small.White.Bold" >
+	<item name="android:textStyle">bold</item>	
+</style>
+
+<style name="Medium.White">
+	<item name="android:textColor">@color/white</item>		
+</style>
+
+<style name="Medium.White.Bold" >
+	<item name="android:textStyle">bold</item>	
+</style>
+
+<style name="Large.White">
+	<item name="android:textColor">@color/white</item>		
+</style>
+
+<style name="Large.White.Bold" >
+	<item name="android:textStyle">bold</item>	
+</style>
+
+<style name="XLarge.White">
+	<item name="android:textColor">@color/white</item>		
+</style>
+
+<style name="XLarge.White.Bold" >
+	<item name="android:textStyle">bold</item>	
+</style>
+
+<style name="title">
+	<item name="android:textColor">@color/black</item>
+	<item name="android:textSize">22sp</item>
+	<item name="android:textStyle">bold</item>
+</style>
+
+<!-- others -->
+
+<style name="basic_blue_button">
+	<item name="android:textColor">@color/white</item>
+	<item name="android:textSize">18sp</item>
+	<item name="android:textStyle">bold</item>
+	<item name="android:padding">10dip</item>
+	<item name="android:background">@drawable/button_light_blue</item>
+	<item name="android:layout_margin">10dip</item>
+	<item name="android:layout_width">wrap_content</item>
+	<item name="android:layout_height">wrap_content</item>
+</style>
+
+<style name="global_listview" parent="@android:style/Widget.ListView">
+	<item name="android:background">@drawable/rectangle_rounded</item>
+	<item name="android:divider">@drawable/list_divider</item>
+	<item name="android:dividerHeight">1dip</item>
+	<item name="android:cacheColorHint">@color/clear</item>
+</style>
+
+<style name="global_frame">
+	<item name="android:background">@drawable/rectangle_rounded</item>
+</style>
+
+<style name="ProgressTheme">
+	<item name="android:layout_width">wrap_content</item>
+	<item name="android:layout_height">wrap_content</item>
+	<item name="android:layout_gravity">center</item>
+	<item name="android:windowNoTitle">true</item>
+	<item name="android:windowBackground">@color/transparent</item>
+	<item name="android:textColor">@color/white</item>
+	<item name="android:textSize">15sp</item>
+</style>
+
+<style name="map_popup_name">
+		<item name="android:textColor">@color/white</item>
+		<item name="android:textSize">15sp</item>
+		<item name="android:textStyle">bold</item>
+</style>
+	
+<style name="map_popup_coordinates">
+		<item name="android:textColor">@color/white</item>
+		<item name="android:textSize">12sp</item>
+</style>
+
+</resources>
