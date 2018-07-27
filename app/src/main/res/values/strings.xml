@@ -63,6 +63,11 @@
 
     <string name="button_add_zip">ADD ZIP</string>
     <string name="weatherLabel">Weather:</string>
+    <string name="lastUpdatedTime">Last Updated Time:</string>
+    <string name="sunRiseLabelText">Sunrise:</string>
+    <string name="sunSetLabelText">Sunset:</string>
+
+    <string name="zipCodeLabelText">Zip Code:</string>
 
 </resources>
 

@@ -1,9 +1,14 @@
 package com.weather.android.util;
 
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.TimeZone;
 
 import com.weather.android.R;
+import com.weather.android.to.TemperatureTO;
 
 import android.app.Activity;
 import android.content.Context;
@@ -96,6 +101,32 @@ public class SystemUtil {
 		
 		return flag;
 		
+	}
+
+	public static TemperatureTO convertFromKelvinToFahrenheitAndCelcius(Double kelvinTemp){
+		//Conversion temperature formulas following below:
+		//T(°F) = T(K) × 9/5 - 459.67
+		//T(°C) = T(K) - 273.15
+		Double  fahrenheitTemp = (kelvinTemp*9/5) - 459.67,
+				celsiusTemp = kelvinTemp - 273.15;
+
+		DecimalFormat df = new DecimalFormat("##.#");
+
+		TemperatureTO temperatureData = new TemperatureTO();
+		temperatureData.setFormattedCelciusTemp(df.format(celsiusTemp));
+		temperatureData.setFormattedFahrenheitTemp(df.format(fahrenheitTemp));
+
+		return temperatureData;
+	}
+
+	public static String getformattedDate(Long unixSeconds){
+		Date date = new Date(unixSeconds*1000L);
+		// the format of your date
+		SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
+		// give a timezone formatting reference
+		sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+		return sdf.format(date);
 	}
 	
 }

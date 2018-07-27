@@ -21,7 +21,7 @@ public class WeatherTO
 	 private Integer visibility;
 	 Wind wind;
      Clouds clouds;
-	 private Integer dt;
+	 private Long dt;
 	 Sys sys;
 	 private Integer id;
 	 private String name;

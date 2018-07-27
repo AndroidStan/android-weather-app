@@ -32,7 +32,26 @@
 				 android:layout_width="wrap_content"
 				 android:layout_height="wrap_content"
 				 android:paddingLeft="10dip" />
+		 </LinearLayout>
 
+		 <LinearLayout
+			 android:layout_width="match_parent"
+			 android:layout_height="wrap_content"
+			 android:orientation="horizontal"
+			 android:padding="5dp">
+			 <TextView
+				 android:id="@+id/lastUpdatedTimeLabel"
+				 style="@style/Small.Bold"
+				 android:layout_width="wrap_content"
+				 android:layout_height="wrap_content"
+				 android:text="@string/lastUpdatedTime" />
+
+			 <TextView android:id="@+id/lastUpdatedTimeTextView"
+				 style="@style/Small"
+				 android:gravity="center_horizontal"
+				 android:layout_width="wrap_content"
+				 android:layout_height="wrap_content"
+				 android:paddingLeft="10dip" />
 		 </LinearLayout>
 
          <LinearLayout
@@ -52,10 +71,48 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:paddingLeft="10dip" />
-
          </LinearLayout>
 
-		 <LinearLayout
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:padding="5dp">
+             <TextView
+                 android:id="@+id/sunRiseLabel"
+                 style="@style/Small.Bold"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/sunRiseLabelText" />
+
+             <TextView android:id="@+id/sunRiseTextView"
+                 style="@style/Small"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:paddingLeft="10dip" />
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:padding="5dp">
+             <TextView
+                 android:id="@+id/sunSetLabel"
+                 style="@style/Small.Bold"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="@string/sunSetLabelText" />
+
+             <TextView android:id="@+id/sunSetTextView"
+                 style="@style/Small"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:paddingLeft="10dip" />
+         </LinearLayout>
+
+
+         <LinearLayout
 			 android:layout_width="match_parent"
 			 android:layout_height="wrap_content"
 			 android:orientation="horizontal"
@@ -72,7 +129,6 @@
 				 android:layout_width="wrap_content"
 				 android:layout_height="wrap_content"
 				 android:paddingLeft="10dip" />
-
 		 </LinearLayout>
 
 	 </LinearLayout>

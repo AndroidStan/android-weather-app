@@ -8,6 +8,6 @@ public class Sys {
 	 private Integer id;
 	 private Double message;
 	 private String country;
-	 private Integer sunrise;
-	 private Integer sunset;
+	 private Long sunrise;
+	 private Long sunset;
 }

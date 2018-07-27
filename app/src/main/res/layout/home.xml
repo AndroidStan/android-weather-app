@@ -14,12 +14,39 @@
 		android:orientation="vertical"
         android:padding="10dp">
 
+        <LinearLayout
+            android:id="@+id/zipCodeLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:orientation="horizontal"
+            android:layout_centerHorizontal="true"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/zipCodeLabel"
+                style="@style/Medium.Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/zipCodeLabelText" />
+
+            <AutoCompleteTextView
+                style="@style/Medium"
+                android:inputType="numberDecimal"
+                android:maxLength="5"
+                android:completionThreshold="1"
+                android:layout_width="61dp"
+                android:layout_height="40dp"
+                android:id="@+id/enterZipCode"/>
+
+        </LinearLayout>
+
         <ListView android:id="@+id/list"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             style="@style/global_listview"
-            android:layout_marginTop="10dip"
-            android:layout_marginBottom="10dip"
+            android:layout_marginBottom="5dp"
+            android:layout_below="@+id/zipCodeLinearLayout"
             android:layout_above="@+id/button_add_zip"/>
 
 		<Button
@@ -29,7 +56,7 @@
             android:background="@drawable/button_light_blue"
             android:text="@string/button_add_zip"
             style="@style/Small.White.Bold"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true" />

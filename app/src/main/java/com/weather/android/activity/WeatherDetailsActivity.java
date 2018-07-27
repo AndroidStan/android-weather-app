@@ -13,11 +13,17 @@ import com.weather.android.to.*;
 import com.weather.android.util.*;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 public class WeatherDetailsActivity extends BaseActivity {
 	private TextView 	textViewCityName,
 						textViewCityTemperature,
-						textViewWeather;
+						textViewWeather,
+                        textViewLastUpdated,
+                        textViewSunrise,
+                        textViewSunset;
 	private Button buttonBack;
 	
 	private class AsyncParseTask extends AsyncTask <String,Integer,ErrorMessageTO> 
@@ -78,22 +84,6 @@ public class WeatherDetailsActivity extends BaseActivity {
 		} 
 	}
 
-	private TemperatureTO convertFromKelvinToFahrenheitAndCelcius(Double kelvinTemp){
-        //Conversion temperature formulas following below:
-        //T(°F) = T(K) × 9/5 - 459.67
-        //T(°C) = T(K) - 273.15
-	    Double  fahrenheitTemp = (kelvinTemp*9/5) - 459.67,
-                celsiusTemp = kelvinTemp - 273.15;
-
-        DecimalFormat df = new DecimalFormat("##.#");
-
-        TemperatureTO temperatureData = new TemperatureTO();
-        temperatureData.setFormattedCelciusTemp(df.format(celsiusTemp));
-        temperatureData.setFormattedFahrenheitTemp(df.format(fahrenheitTemp));
-
-        return temperatureData;
-    }
-
 	private void populateWeatherDetails(){
 		//set the fields text
 		String  formattedCityName = WeatherApplication.getWeatherDetails().getName(),
@@ -104,6 +94,15 @@ public class WeatherDetailsActivity extends BaseActivity {
 
         textViewCityName.setText(formattedCityName);
 
+        String lastUpdatedTime = SystemUtil.getformattedDate(WeatherApplication.getWeatherDetails().getDt());
+        textViewLastUpdated.setText(lastUpdatedTime);
+
+        String sunRiseTime = SystemUtil.getformattedDate(WeatherApplication.getWeatherDetails().getSys().getSunrise());
+        textViewSunrise.setText(sunRiseTime);
+
+        String sunSetTime = SystemUtil.getformattedDate(WeatherApplication.getWeatherDetails().getSys().getSunset());
+        textViewSunset.setText(sunSetTime);
+
         TemperatureTO   cityTemp = new TemperatureTO(),
                         cityMinTemp = new TemperatureTO(),
                         cityMaxTemp = new TemperatureTO();
@@ -112,9 +111,9 @@ public class WeatherDetailsActivity extends BaseActivity {
                 kelvinCityMinTemp = WeatherApplication.getWeatherDetails().getMain().getTemp_min(),
                 kelvinCityMaxTemp = WeatherApplication.getWeatherDetails().getMain().getTemp_max();
 
-        cityTemp = convertFromKelvinToFahrenheitAndCelcius(kelvinCityTemp);
-        cityMinTemp = convertFromKelvinToFahrenheitAndCelcius(kelvinCityMinTemp);
-        cityMaxTemp = convertFromKelvinToFahrenheitAndCelcius(kelvinCityMaxTemp);
+        cityTemp = SystemUtil.convertFromKelvinToFahrenheitAndCelcius(kelvinCityTemp);
+        cityMinTemp = SystemUtil.convertFromKelvinToFahrenheitAndCelcius(kelvinCityMinTemp);
+        cityMaxTemp = SystemUtil.convertFromKelvinToFahrenheitAndCelcius(kelvinCityMaxTemp);
 
         String formattedCityTemp =  cityTemp.getFormattedFahrenheitTemp()
                                     + " °F (min: " + cityMinTemp.getFormattedFahrenheitTemp() + ", "
@@ -153,7 +152,10 @@ public class WeatherDetailsActivity extends BaseActivity {
 
         textViewCityName = (TextView) findViewById(R.id.cityName);
         textViewCityTemperature = (TextView) findViewById(R.id.cityTemperature);
-		textViewWeather = (TextView) findViewById(R.id.weather);;
+		textViewWeather = (TextView) findViewById(R.id.weather);
+        textViewLastUpdated = (TextView) findViewById(R.id.lastUpdatedTimeTextView);
+        textViewSunrise = (TextView) findViewById(R.id.sunRiseTextView);
+        textViewSunset = (TextView) findViewById(R.id.sunSetTextView);
 
         buttonBack = (Button) findViewById(R.id.button_back);
 

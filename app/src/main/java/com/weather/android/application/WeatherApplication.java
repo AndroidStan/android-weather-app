@@ -34,6 +34,7 @@ public class WeatherApplication extends Application {
 	private static USACitiesDatabase usaCitiesDatabase;
 
 	private static List<CityDetails> citiesDetails;
+	private static List<Integer> suggestedCitiesZips;
 
 	/*private void copyDatabaseIfNotExist(){
 		try {
@@ -93,6 +94,14 @@ public class WeatherApplication extends Application {
 
     public static List<CityDetails> getCitiesDetails(){
 	    return citiesDetails;
+    }
+
+    public static void setSuggestedCitiesZips(List<Integer> suggestedZips){
+	    suggestedCitiesZips = suggestedZips;
+    }
+
+    public static List<Integer> getSuggestedCitiesZips(){
+	    return suggestedCitiesZips;
     }
 
     public static void clearCitiesDetails(){

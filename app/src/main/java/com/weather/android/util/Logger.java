@@ -7,7 +7,7 @@ public class Logger {
 	
 	private static String OFFSET = " >>> ";
 	
-	private static String TAG = "JRD";
+	private static String TAG = "WA";
 	private static boolean DEBUG = true;
 	
 	

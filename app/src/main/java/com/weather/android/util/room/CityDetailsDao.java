@@ -7,6 +7,9 @@ import java.util.List;
 
 @Dao
 public interface CityDetailsDao {
+    @Query("SELECT zipcode FROM CityDetails")
+    List<Integer> getAllZipCodes();
+
     @Query("SELECT * FROM CityDetails LIMIT :nRecords")
     List<CityDetails> getFirstN(int nRecords);
 

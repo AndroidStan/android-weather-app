@@ -30,4 +30,10 @@ public class DataGatherUtil
 		return WeatherApplication.getUsaCitiesDatabase(context, Constants.SQLITE_DB_NAME).cityDetailsDao().getFirstN(nCities);
 	}
 
+	public static List<Integer> getAllCitiesZips(Context context){
+		return WeatherApplication.getUsaCitiesDatabase(context, Constants.SQLITE_DB_NAME).cityDetailsDao().getAllZipCodes();
+	}
+
+
+
 }
