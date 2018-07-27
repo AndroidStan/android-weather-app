@@ -28,7 +28,7 @@ public class HTTPUtil
 	private static void openHttpConnection(String doctorsSearchURL/*, final String username, final String password*/)
 	{
 		int resCode = -1; 
-		Logger.i("Make connection to "+doctorsSearchURL);
+		Logger.i("Make connection to "+ doctorsSearchURL);
 		try 
 		{ 
 			URL url = new URL(doctorsSearchURL); 
@@ -37,8 +37,7 @@ public class HTTPUtil
 			if(url!=null)
 				urlConn = url.openConnection(); 
 			
-			if (!(urlConn instanceof HttpsURLConnection)) 
-			{ 
+			if (!(urlConn instanceof HttpsURLConnection)) {
 				throw new IOException ("URL is not an Https URL"); 
 			} 
 
@@ -60,8 +59,7 @@ public class HTTPUtil
 		    resCode = m_Connection.getResponseCode(); 
 		    Logger.i("http response code = "+resCode);   
 		    
-		    if (resCode == HttpsURLConnection.HTTP_OK) 
-		    { 
+		    if (resCode == HttpsURLConnection.HTTP_OK) {
 		    	Logger.i("getting input stream");   
 		        m_InputStream = m_Connection.getInputStream(); 
 		    } 

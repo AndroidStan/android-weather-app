@@ -140,15 +140,37 @@ public class HomeActivity extends BaseActivity
                 autoCompleteTextView.requestFocus();
 
                 //show the keyboard
-                /*InputMethodManager imm = (InputMethodManager) HomeActivity.this
-                        .getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);*/
-
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
             }
         });
 
-		new AsyncParseTask().execute(Constants.CITIES_INITIAL_ENTRIES_NUM);
+        autoCompleteTextView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected (AdapterView<?> parent, View view, int position, long id) {
+                makeLongToast("Item selected");
+            }
+            @Override
+            public void onNothingSelected (AdapterView<?> parent) {
+                makeLongToast("Nothing selected");
+            }
+        });
+
+		if(     WeatherApplication.getCitiesDetails() == null &&
+                WeatherApplication.getSuggestedCitiesZips() == null)
+
+		    new AsyncParseTask().execute(Constants.CITIES_INITIAL_ENTRIES_NUM);
+		else{
+            homeAdapter = new HomeAdapter(getApplicationContext(), WeatherApplication.getCitiesDetails());
+            listView.setAdapter(homeAdapter);
+
+            ArrayAdapter<Integer> adapter = new ArrayAdapter<>( getApplicationContext(),
+                    R.layout.single_line_dropdown,
+                    R.id.dropdownLine,
+                    WeatherApplication.getSuggestedCitiesZips());
+
+            autoCompleteTextView.setAdapter(adapter);
+        }
+
 	}
 }
