@@ -26,34 +26,28 @@ public class WeatherDetailsActivity extends BaseActivity {
                         textViewSunset;
 	private Button buttonBack;
 	
-	private class AsyncParseTask extends AsyncTask <String,Integer,ErrorMessageTO> 
-	{	
-		AsyncParseTask()
-		{
+	private class AsyncParseTask extends AsyncTask <String,Integer,ErrorMessageTO> {
+		AsyncParseTask() {
 		}
 		
-		protected void onPreExecute()
-		{
+		protected void onPreExecute() {
 			showProgressDialog(	getText(R.string.progress_title).toString(),
 								R.string.progress_text,
 								this,
 								true);
 		}
 		
-		protected ErrorMessageTO doInBackground(String... urlParams) 
-		{
+		protected ErrorMessageTO doInBackground(String... urlParams) {
 			ErrorMessageTO errorMessage = null;
 			String 	cityId= urlParams[0];
 			
-			try
-			{
+			try {
 				WeatherApplication.clearWeather();
 
 				WeatherTO weatherDetails = DataGatherUtil.getWeather(cityId);
 				WeatherApplication.setWeather(weatherDetails);
 			}
-			catch(Exception e)
-			{
+			catch(Exception e) {
 				errorMessage = new ErrorMessageTO(e,getText(R.string.server_data_failure).toString());
 				Logger.e(Log.getStackTraceString(e));
 			}
@@ -61,20 +55,16 @@ public class WeatherDetailsActivity extends BaseActivity {
 			return errorMessage;
 		}
 		
-		protected void onProgressUpdate(Integer... progress) 
-		{ 
+		protected void onProgressUpdate(Integer... progress) {
 		}
 		 
-		protected void onPostExecute(ErrorMessageTO errorMessage)
-		{
+		protected void onPostExecute(ErrorMessageTO errorMessage) {
 			dismissDialog();	         
 
 			if(errorMessage != null)
 				createDialogAndHandleTechnicalExceptionAndFinishActivity(errorMessage);
-			else
-			{
-				if(WeatherApplication.getWeatherDetails() == null)
-				{
+			else {
+				if(WeatherApplication.getWeatherDetails() == null) {
 					showDialogAndFinishActivity(getText(R.string.no_weather_title).toString(),getText(R.string.no_results).toString());
 					return;
 				}
@@ -145,8 +135,7 @@ public class WeatherDetailsActivity extends BaseActivity {
 
 	/** Called when the activity is first created. */
     @Override
-    public void onCreate(Bundle savedInstanceState) 
-    {   
+    public void onCreate(Bundle savedInstanceState) {
        	super.onCreate(savedInstanceState);
     	setContentView(R.layout.weather_details);
 

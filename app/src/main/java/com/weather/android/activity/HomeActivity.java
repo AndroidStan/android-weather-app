@@ -36,16 +36,14 @@ public class HomeActivity extends BaseActivity
 
 	private class AsyncParseTask extends AsyncTask <String,Integer,ErrorMessageTO> {
 
-		AsyncParseTask()
-		{
+		AsyncParseTask() {
 		}
 
-		protected void onPreExecute()
-		{
+		protected void onPreExecute() {
 		}
 
-		protected ErrorMessageTO doInBackground(String... urlParams)
-		{
+		protected ErrorMessageTO doInBackground(String... urlParams) {
+
 			ErrorMessageTO errorMessage = null;
 			String 	asyncParamValue = urlParams[0],
                     operationType = urlParams[1];
@@ -116,7 +114,10 @@ public class HomeActivity extends BaseActivity
                     Integer zipCodeToRemove = WeatherApplication.getCitiesDetailsBySameZipCode().get(0).getZipcode();
 
                     WeatherApplication.getSuggestedCitiesZips().remove(zipCodeToRemove);
-                    autoCompleteAdapter.notifyDataSetChanged();
+
+                    autoCompleteAdapter.remove(zipCodeToRemove);
+                    autoCompleteTextView.setAdapter(autoCompleteAdapter);
+                    //autoCompleteAdapter.notifyDataSetChanged();
 
                     //add all of the cities with the same zipcode to the home list
                     Integer numCitiesSameZipCode = WeatherApplication.getCitiesDetailsBySameZipCode().size();
@@ -186,7 +187,10 @@ public class HomeActivity extends BaseActivity
                 //add the zip code at the autoComplete if just the last city with this particular zip code is about to be removed
 			    if(numOfCitiesSameZip == 1){
                     WeatherApplication.getSuggestedCitiesZips().add(cityDetailsToRemove.getZipcode());
-                    autoCompleteAdapter.notifyDataSetChanged();
+
+                    autoCompleteAdapter.add(cityDetailsToRemove.getZipcode());
+                    autoCompleteTextView.setAdapter(autoCompleteAdapter);
+                    //autoCompleteAdapter.notifyDataSetChanged();
                 }
 
                 //remove an element from the main list each time we perform a long click

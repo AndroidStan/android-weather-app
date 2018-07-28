@@ -14,6 +14,7 @@ import java.util.List;
 public class DataGatherUtil
 {
 	public static WeatherTO getWeather(String cityId){
+
 		String getWeatherUrl = Constants.WEATHER_URL
 								+ cityId
 								+ "&appid="
@@ -21,9 +22,10 @@ public class DataGatherUtil
 
 		String response = HTTPUtil.getServerResponse(getWeatherUrl);
 
-		WeatherTO weatherDetails = DataParser.parseWeatherDetails(response);
+        if(!response.equals(""))
+		  return DataParser.parseWeatherDetails(response);
 
-		return weatherDetails;
+        return null;
 	}
 
 	public static List<CityDetails> getFirstNCities(Context context, Integer nCities){
