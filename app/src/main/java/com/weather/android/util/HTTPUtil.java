@@ -25,13 +25,13 @@ public class HTTPUtil
 		m_InputStream = null;
 	}
 	
-	private static void openHttpConnection(String doctorsSearchURL/*, final String username, final String password*/)
+	private static void openHttpConnection(String searchURL/*, final String username, final String password*/)
 	{
 		int resCode = -1; 
-		Logger.i("Make connection to "+ doctorsSearchURL);
+		Logger.i("Make connection to "+ searchURL);
 		try 
 		{ 
-			URL url = new URL(doctorsSearchURL); 
+			URL url = new URL(searchURL);
 			URLConnection urlConn = null;
 			
 			if(url!=null)
@@ -106,9 +106,9 @@ public class HTTPUtil
 	  return retVal;
 	}
 	
-	public static String getServerResponse(String doctorsSearchURL/*, String username, String password*/)
+	public static String getServerResponse(String searchURL/*, String username, String password*/)
 	{ 
-		openHttpConnection(doctorsSearchURL/*, username, password*/);
+		openHttpConnection(searchURL/*, username, password*/);
 		String response = convertStreamToString();
 		closeHttpConnection();
 		Logger.i("http response : "+response);

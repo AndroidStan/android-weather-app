@@ -28,13 +28,14 @@ public class WeatherApplication extends Application {
 	private String versionCustomNumber;	// like 1.2.23
 	private int versionSingleIntCode; // like 4
 
-	private static Integer numDoctorsPages;
+
 	private static WeatherTO weatherDetails;
 	private static DataBaseHelperUtil databaseHelperUtil;
 	private static USACitiesDatabase usaCitiesDatabase;
 
 	private static List<CityDetails> citiesDetails;
 	private static List<Integer> suggestedCitiesZips;
+	private static List<CityDetails> citiesDetailsBySameZipCode;
 
 	/*private void copyDatabaseIfNotExist(){
 		try {
@@ -67,6 +68,12 @@ public class WeatherApplication extends Application {
         //copyDatabaseIfNotExist();
 	}
 
+	@Override
+    public void onTerminate(){
+        closeRoomDatabase();
+	    super.onTerminate();
+    }
+
 	static final Migration MIGRATION_1_2 = new Migration(1, 2) {
 		@Override
 		public void migrate(SupportSQLiteDatabase database) {
@@ -88,6 +95,11 @@ public class WeatherApplication extends Application {
 		return usaCitiesDatabase;
 	}
 
+	private static void closeRoomDatabase(){
+		if(usaCitiesDatabase != null)
+			usaCitiesDatabase.close();
+	}
+
 	public static void setCitiesDetails(List<CityDetails> citiesDetailsList){
 	    citiesDetails = citiesDetailsList;
     }
@@ -102,6 +114,20 @@ public class WeatherApplication extends Application {
 
     public static List<Integer> getSuggestedCitiesZips(){
 	    return suggestedCitiesZips;
+    }
+
+    //citiesDetailsBySameZipCode
+    public static void setCitiesDetailsBySameZipCode(List<CityDetails> citiesDetailsBySameZipInput){
+        citiesDetailsBySameZipCode = citiesDetailsBySameZipInput;
+    }
+
+    public static List<CityDetails> getCitiesDetailsBySameZipCode(){
+	    return citiesDetailsBySameZipCode;
+    }
+
+    public static void clearCitiesIdsBySameZipCode(){
+	    if(citiesDetailsBySameZipCode != null)
+            citiesDetailsBySameZipCode.clear();
     }
 
     public static void clearCitiesDetails(){

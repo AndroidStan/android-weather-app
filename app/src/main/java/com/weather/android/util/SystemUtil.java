@@ -20,6 +20,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.URLSpan;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
 
 public class SystemUtil {
 
@@ -101,6 +102,11 @@ public class SystemUtil {
 		
 		return flag;
 		
+	}
+
+	public static void showSoftKeyboard(Activity activity){
+		InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
 	}
 
 	public static TemperatureTO convertFromKelvinToFahrenheitAndCelcius(Double kelvinTemp){

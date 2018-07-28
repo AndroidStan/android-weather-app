@@ -7,13 +7,11 @@ import com.weather.android.inf.Constants;
 import com.weather.android.to.ErrorMessageTO;
 import com.weather.android.util.DataGatherUtil;
 import com.weather.android.util.Logger;
+import com.weather.android.util.SystemUtil;
 import com.weather.android.util.room.CityDetails;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
@@ -34,6 +32,7 @@ public class HomeActivity extends BaseActivity
     private AutoCompleteTextView autoCompleteTextView;
     private LinearLayout zipCodeLinearLayout;
 	private HomeAdapter homeAdapter;
+    private ArrayAdapter<Integer> autoCompleteAdapter;
 
 	private class AsyncParseTask extends AsyncTask <String,Integer,ErrorMessageTO> {
 
@@ -48,19 +47,40 @@ public class HomeActivity extends BaseActivity
 		protected ErrorMessageTO doInBackground(String... urlParams)
 		{
 			ErrorMessageTO errorMessage = null;
-			String 	maxEntriesNum = urlParams[0];
+			String 	asyncParamValue = urlParams[0],
+                    operationType = urlParams[1];
 
 			try {
 
-				WeatherApplication.clearCitiesDetails();
-                List<CityDetails> citiesDetails = DataGatherUtil.getFirstNCities(getApplicationContext(), Integer.valueOf(maxEntriesNum));
-                WeatherApplication.setCitiesDetails(citiesDetails);
+                if(operationType.equals(Constants.GATHER_INITIAL_DATA)){
+                    List<CityDetails> citiesDetails = DataGatherUtil.getFirstNCities(   getApplicationContext(),
+                                                                                        Integer.valueOf(asyncParamValue));
+                    WeatherApplication.setCitiesDetails(citiesDetails);
 
-                List<Integer> citiesZips = DataGatherUtil.getAllCitiesZips(getApplicationContext());
-                WeatherApplication.setSuggestedCitiesZips(citiesZips);
+                    //getting all of the database zipcodes
+                    List<Integer> citiesZips = DataGatherUtil.getAllCitiesZips(getApplicationContext());
+                    //removing the zip codes which have at least one associated city already pre-populated at the main list
+                    for(int i=0; i < citiesDetails.size(); i++){
+                        citiesZips.remove(citiesDetails.get(i).getZipcode());
+                    }
+
+                    WeatherApplication.setSuggestedCitiesZips(citiesZips);
+
+                    errorMessage = new ErrorMessageTO(null, Constants.GATHER_INITIAL_DATA);
+                }
+
+                if(operationType.equals(Constants.GET_CITIES_IDS_BY_SAME_ZIP)){
+                    WeatherApplication.clearCitiesIdsBySameZipCode();
+
+                    List<CityDetails> citiesDetails = DataGatherUtil.getCitiesDetailsBySameZipCode( getApplicationContext(),
+                                                                                                Integer.valueOf(asyncParamValue));
+
+                    WeatherApplication.setCitiesDetailsBySameZipCode(citiesDetails);
+
+                    errorMessage = new ErrorMessageTO(null, Constants.GET_CITIES_IDS_BY_SAME_ZIP);
+                }
 			}
-			catch(Exception e)
-			{
+			catch(Exception e) {
 				errorMessage = new ErrorMessageTO(e,getText(R.string.server_data_failure).toString());
 				Logger.e(Log.getStackTraceString(e));
 			}
@@ -68,37 +88,65 @@ public class HomeActivity extends BaseActivity
 			return errorMessage;
 		}
 
-		protected void onProgressUpdate(Integer... progress)
-		{
+		protected void onProgressUpdate(Integer... progress) {
 		}
 
-		protected void onPostExecute(ErrorMessageTO errorMessage)
-		{
+		protected void onPostExecute(ErrorMessageTO errorMessage) {
 			dismissDialog();
 
-			if(errorMessage != null)
+			//if there is an exception
+			if(errorMessage.getError() != null)
 				createDialogAndHandleTechnicalExceptionAndFinishActivity(errorMessage);
-			else
-			{
-				if(WeatherApplication.getCitiesDetails().isEmpty())
-				{
-					showDialogAndFinishActivity(getText(R.string.no_weather_db_title).toString(),getText(R.string.no_db_results).toString());
-					return;
-				}
+			else {
 
-				//set the homeAdapter
-				homeAdapter = new HomeAdapter(getApplicationContext(), WeatherApplication.getCitiesDetails());
-				listView.setAdapter(homeAdapter);
+			    if(errorMessage.getDisplayableMessage().equals(Constants.GATHER_INITIAL_DATA)) {
 
-                ArrayAdapter<Integer> adapter = new ArrayAdapter<>( getApplicationContext(),
-                                                                    R.layout.single_line_dropdown,
-                                                                    R.id.dropdownLine,
-                                                                    WeatherApplication.getSuggestedCitiesZips());
+                    if (WeatherApplication.getCitiesDetails().isEmpty() ||
+                            WeatherApplication.getSuggestedCitiesZips().isEmpty()) {
 
-                autoCompleteTextView.setAdapter(adapter);
+                        showDialogAndFinishActivity(getText(R.string.no_weather_db_title).toString(),
+                                getText(R.string.no_db_results).toString());
+                        return;
+                    }
+
+                    setHomeAndAutoCompleteAdapters();
+                }
+
+                if(errorMessage.getDisplayableMessage().equals(Constants.GET_CITIES_IDS_BY_SAME_ZIP)){
+                    Integer zipCodeToRemove = WeatherApplication.getCitiesDetailsBySameZipCode().get(0).getZipcode();
+
+                    WeatherApplication.getSuggestedCitiesZips().remove(zipCodeToRemove);
+                    autoCompleteAdapter.notifyDataSetChanged();
+
+                    //add all of the cities with the same zipcode to the home list
+                    Integer numCitiesSameZipCode = WeatherApplication.getCitiesDetailsBySameZipCode().size();
+                    for(int i=0; i < numCitiesSameZipCode; i++)
+                        WeatherApplication.getCitiesDetails().add(WeatherApplication.getCitiesDetailsBySameZipCode().get(i));
+
+                    homeAdapter.notifyDataSetChanged();
+
+                    String cityIdOfTheFirstCityWithThisZipCode = WeatherApplication.getCitiesDetailsBySameZipCode().get(0).getId().toString();
+
+                    Intent myIntent = new Intent(getApplicationContext(), WeatherDetailsActivity.class);
+                    myIntent.putExtra("cityId", cityIdOfTheFirstCityWithThisZipCode);
+                    startActivity(myIntent);
+                }
+
 			}
 		}
 	}
+
+	private void setHomeAndAutoCompleteAdapters(){
+        homeAdapter = new HomeAdapter(getApplicationContext(), WeatherApplication.getCitiesDetails());
+        listView.setAdapter(homeAdapter);
+
+        autoCompleteAdapter = new ArrayAdapter<>(   getApplicationContext(),
+                                                    R.layout.single_line_dropdown,
+                                                    R.id.dropdownLine,
+                                                    WeatherApplication.getSuggestedCitiesZips());
+
+        autoCompleteTextView.setAdapter(autoCompleteAdapter);
+    }
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -126,9 +174,25 @@ public class HomeActivity extends BaseActivity
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
 			@Override
 			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
+                CityDetails cityDetailsToRemove = WeatherApplication.getCitiesDetails().get(pos);
 
+			    Integer numOfCitiesSameZip = 0,
+                        numOfCitiesInTheList = WeatherApplication.getCitiesDetails().size();
+
+			    for(int i=0; i < numOfCitiesInTheList; i++)
+			        if( WeatherApplication.getCitiesDetails().get(i).getZipcode().equals(cityDetailsToRemove.getZipcode()) )
+                        numOfCitiesSameZip++;
+
+                //add the zip code at the autoComplete if just the last city with this particular zip code is about to be removed
+			    if(numOfCitiesSameZip == 1){
+                    WeatherApplication.getSuggestedCitiesZips().add(cityDetailsToRemove.getZipcode());
+                    autoCompleteAdapter.notifyDataSetChanged();
+                }
+
+                //remove an element from the main list each time we perform a long click
                 WeatherApplication.getCitiesDetails().remove(pos);
                 homeAdapter.notifyDataSetChanged();
+
                 return true;
 			}
 		});
@@ -139,38 +203,25 @@ public class HomeActivity extends BaseActivity
                 autoCompleteTextView.setFocusableInTouchMode(true);
                 autoCompleteTextView.requestFocus();
 
-                //show the keyboard
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
+                SystemUtil.showSoftKeyboard(HomeActivity.this);
             }
         });
 
-        autoCompleteTextView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        autoCompleteTextView.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemSelected (AdapterView<?> parent, View view, int position, long id) {
-                makeLongToast("Item selected");
-            }
-            @Override
-            public void onNothingSelected (AdapterView<?> parent) {
-                makeLongToast("Nothing selected");
+            public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
+                Object item = parent.getItemAtPosition(position);
+                Integer zipCode = (Integer) item;
+
+                new AsyncParseTask().execute(   zipCode.toString(),
+                                                Constants.GET_CITIES_IDS_BY_SAME_ZIP);
             }
         });
 
-		if(     WeatherApplication.getCitiesDetails() == null &&
-                WeatherApplication.getSuggestedCitiesZips() == null)
-
-		    new AsyncParseTask().execute(Constants.CITIES_INITIAL_ENTRIES_NUM);
-		else{
-            homeAdapter = new HomeAdapter(getApplicationContext(), WeatherApplication.getCitiesDetails());
-            listView.setAdapter(homeAdapter);
-
-            ArrayAdapter<Integer> adapter = new ArrayAdapter<>( getApplicationContext(),
-                    R.layout.single_line_dropdown,
-                    R.id.dropdownLine,
-                    WeatherApplication.getSuggestedCitiesZips());
-
-            autoCompleteTextView.setAdapter(adapter);
-        }
-
+		if(WeatherApplication.getCitiesDetails() == null)
+		    new AsyncParseTask().execute(   Constants.CITIES_INITIAL_ENTRIES_NUM,
+                                            Constants.GATHER_INITIAL_DATA);
+		else
+            setHomeAndAutoCompleteAdapters();
 	}
 }

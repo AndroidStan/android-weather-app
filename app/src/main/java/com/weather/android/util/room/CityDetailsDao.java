@@ -7,12 +7,15 @@ import java.util.List;
 
 @Dao
 public interface CityDetailsDao {
-    @Query("SELECT zipcode FROM CityDetails")
+    @Query("SELECT DISTINCT zipcode FROM CityDetails")
     List<Integer> getAllZipCodes();
 
     @Query("SELECT * FROM CityDetails LIMIT :nRecords")
     List<CityDetails> getFirstN(int nRecords);
 
-    @Query("SELECT * FROM CityDetails LIMIT :startLimit, :endLimit")
-    List<CityDetails> getRange(int startLimit, int endLimit);
+    @Query("SELECT * FROM CityDetails WHERE zipcode=:zipcode")
+    List<CityDetails> getCitiesDetailsBySameZipCode(int zipcode);
+
+    /*@Query("SELECT * FROM CityDetails LIMIT :startLimit, :endLimit")
+    List<CityDetails> getRange(int startLimit, int endLimit);*/
 }

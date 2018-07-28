@@ -34,6 +34,7 @@ public class DataGatherUtil
 		return WeatherApplication.getUsaCitiesDatabase(context, Constants.SQLITE_DB_NAME).cityDetailsDao().getAllZipCodes();
 	}
 
-
-
+	public static List<CityDetails> getCitiesDetailsBySameZipCode(Context context, Integer zipcode){
+		return WeatherApplication.getUsaCitiesDatabase(context, Constants.SQLITE_DB_NAME).cityDetailsDao().getCitiesDetailsBySameZipCode(zipcode);
+	}
 }
