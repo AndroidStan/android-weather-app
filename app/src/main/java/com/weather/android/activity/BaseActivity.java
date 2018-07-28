@@ -124,14 +124,11 @@ public class BaseActivity extends Activity{
 			);	 
 }
 
-	public void showDialogAndFinishActivity(String title, String message)
-	{
+	public void showDialogAndFinishActivity(String title, String message) {
 		showDialog(	title, 
 					message,
-					new OnClickListener()
-					{
-						public void onClick(DialogInterface arg0, int arg1) 
-						{
+					new OnClickListener() {
+						public void onClick(DialogInterface arg0, int arg1) {
 							finish();			// go back or stay on the page?		
 						}				
 					}, 
@@ -142,13 +139,17 @@ public class BaseActivity extends Activity{
 	public void showDialog(String title, String message,OnClickListener positiveOnClickListener, OnClickListener negativeOnClickListener, OnCancelListener onCancelListener){
 		// positive must be !=null. if negative is null, will ask OK. if not, will ask Yes/No.
 		try {
-			Builder builder = new AlertDialog.Builder(this); 
-			builder.setTitle(title);
-			builder.setMessage(message); 
+			Builder builder = new AlertDialog.Builder(this);
+
+			if(title!=null){
+				builder.setTitle(title);
+			}
+
+			builder.setMessage(message);
+
 			if (negativeOnClickListener!=null) {
 				builder.setPositiveButton(R.string.yes, positiveOnClickListener); 
 				builder.setNegativeButton(R.string.no, negativeOnClickListener);
-				
 			}
 			else {
 				builder.setPositiveButton(R.string.ok, positiveOnClickListener); 
@@ -156,7 +157,6 @@ public class BaseActivity extends Activity{
 			if (onCancelListener != null){
 				builder.setOnCancelListener(onCancelListener);
 			}
-
 
 			builder.show();	
 		} catch (Exception e) {
@@ -193,21 +193,17 @@ public class BaseActivity extends Activity{
 		toast.show();
 	}
 	
-	public boolean launchUrl(String url)
-	{
+	public boolean launchUrl(String url) {
 		boolean flag = false;
-		try
-		{
-			if (url.length()>0) 
-			{
+		try {
+			if (url.length()>0) {
 				Uri myurl = Uri.parse(url);
 				Intent intent = new Intent(Intent.ACTION_VIEW, myurl);
 				startActivity(intent);	
 				flag = true;
 			}
 		}
-		catch (Exception e)
-		{
+		catch (Exception e) {
 			Logger.e(Log.getStackTraceString(e));
 		}
 		return flag;

@@ -10,6 +10,7 @@ import com.weather.android.util.Logger;
 import com.weather.android.util.SystemUtil;
 import com.weather.android.util.room.CityDetails;
 
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -149,6 +150,30 @@ public class HomeActivity extends BaseActivity
         autoCompleteTextView.setAdapter(autoCompleteAdapter);
     }
 
+    private void deleteCityListItem(int position){
+        CityDetails cityDetailsToRemove = WeatherApplication.getCitiesDetails().get(position);
+
+        Integer numOfCitiesSameZip = 0,
+                numOfCitiesInTheList = WeatherApplication.getCitiesDetails().size();
+
+        for(int i=0; i < numOfCitiesInTheList; i++)
+            if( WeatherApplication.getCitiesDetails().get(i).getZipcode().equals(cityDetailsToRemove.getZipcode()) )
+                numOfCitiesSameZip++;
+
+        //add the zip code at the autoComplete if just the last city with this particular zip code is about to be removed
+        if(numOfCitiesSameZip == 1){
+            WeatherApplication.getSuggestedCitiesZips().add(cityDetailsToRemove.getZipcode());
+
+            autoCompleteAdapter.add(cityDetailsToRemove.getZipcode());
+            autoCompleteTextView.setAdapter(autoCompleteAdapter);
+            //autoCompleteAdapter.notifyDataSetChanged();
+        }
+
+        //remove an element from the main list each time we perform a long click
+        WeatherApplication.getCitiesDetails().remove(position);
+        homeAdapter.notifyDataSetChanged();
+    }
+
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,28 +200,18 @@ public class HomeActivity extends BaseActivity
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
 			@Override
 			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
-                CityDetails cityDetailsToRemove = WeatherApplication.getCitiesDetails().get(pos);
-
-			    Integer numOfCitiesSameZip = 0,
-                        numOfCitiesInTheList = WeatherApplication.getCitiesDetails().size();
-
-			    for(int i=0; i < numOfCitiesInTheList; i++)
-			        if( WeatherApplication.getCitiesDetails().get(i).getZipcode().equals(cityDetailsToRemove.getZipcode()) )
-                        numOfCitiesSameZip++;
-
-                //add the zip code at the autoComplete if just the last city with this particular zip code is about to be removed
-			    if(numOfCitiesSameZip == 1){
-                    WeatherApplication.getSuggestedCitiesZips().add(cityDetailsToRemove.getZipcode());
-
-                    autoCompleteAdapter.add(cityDetailsToRemove.getZipcode());
-                    autoCompleteTextView.setAdapter(autoCompleteAdapter);
-                    //autoCompleteAdapter.notifyDataSetChanged();
-                }
-
-                //remove an element from the main list each time we perform a long click
-                WeatherApplication.getCitiesDetails().remove(pos);
-                homeAdapter.notifyDataSetChanged();
-
+			    showDialog( null,
+                            getText(R.string.deleteCityWarningMessage).toString(),
+                            new DialogInterface.OnClickListener(){
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                    deleteCityListItem(pos);
+                                }
+                            },
+                            new DialogInterface.OnClickListener(){
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                }
+                            },
+                        null);
                 return true;
 			}
 		});

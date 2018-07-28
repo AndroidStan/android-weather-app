@@ -68,6 +68,7 @@
     <string name="sunSetLabelText">Sunset:</string>
 
     <string name="zipCodeLabelText">Zip Code:</string>
+    <string name="deleteCityWarningMessage">Are you sure you want to delete the following city?</string>
 
 </resources>
 
