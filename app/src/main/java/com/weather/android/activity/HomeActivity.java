@@ -11,6 +11,7 @@ import com.weather.android.util.SystemUtil;
 import com.weather.android.util.room.CityDetails;
 
 import android.content.DialogInterface;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,7 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.support.v7.widget.RecyclerView;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -28,7 +29,7 @@ import java.util.List;
 
 public class HomeActivity extends BaseActivity 
 {
-	private ListView listView;
+	private RecyclerView listView;/*ListView*/
     private Button addZipButton;
     private AutoCompleteTextView autoCompleteTextView;
     private LinearLayout zipCodeLinearLayout;
@@ -139,10 +140,34 @@ public class HomeActivity extends BaseActivity
 	}
 
 	private void setHomeAndAutoCompleteAdapters(){
-        homeAdapter = new HomeAdapter(getApplicationContext(), WeatherApplication.getCitiesDetails());
-        listView.setAdapter(homeAdapter);
 
-        autoCompleteAdapter = new ArrayAdapter<>(   getApplicationContext(),
+	    listView.setAdapter(new HomeAdapter(WeatherApplication.getCitiesDetails(), new HomeAdapter.OnItemClickListener() {
+            @Override public void onItemClick(CityDetails item) {
+                String cityId = item.getId().toString();
+
+                Intent myIntent = new Intent(getApplicationContext(), WeatherDetailsActivity.class);
+                myIntent.putExtra("cityId", cityId);
+                startActivity(myIntent);
+            }
+
+            @Override public void onItemLongClick(CityDetails item){
+                showDialog( null,
+                        getText(R.string.deleteCityWarningMessage).toString(),
+                        new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                deleteCityListItem(item);
+                            }
+                        },
+                        new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface arg0, int arg1) {
+                            }
+                        },
+                        null);
+            }
+
+        }));
+
+	    autoCompleteAdapter = new ArrayAdapter<>(   getApplicationContext(),
                                                     R.layout.single_line_dropdown,
                                                     R.id.dropdownLine,
                                                     WeatherApplication.getSuggestedCitiesZips());
@@ -150,9 +175,7 @@ public class HomeActivity extends BaseActivity
         autoCompleteTextView.setAdapter(autoCompleteAdapter);
     }
 
-    private void deleteCityListItem(int position){
-        CityDetails cityDetailsToRemove = WeatherApplication.getCitiesDetails().get(position);
-
+    private void deleteCityListItem(CityDetails cityDetailsToRemove){
         Integer numOfCitiesSameZip = 0,
                 numOfCitiesInTheList = WeatherApplication.getCitiesDetails().size();
 
@@ -166,11 +189,11 @@ public class HomeActivity extends BaseActivity
 
             autoCompleteAdapter.add(cityDetailsToRemove.getZipcode());
             autoCompleteTextView.setAdapter(autoCompleteAdapter);
-            //autoCompleteAdapter.notifyDataSetChanged();
         }
 
         //remove an element from the main list each time we perform a long click
-        WeatherApplication.getCitiesDetails().remove(position);
+        WeatherApplication.getCitiesDetails().remove(cityDetailsToRemove);
+
         homeAdapter.notifyDataSetChanged();
     }
 
@@ -180,41 +203,13 @@ public class HomeActivity extends BaseActivity
         setContentView(R.layout.home);
 
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.enterZipCode);
-        zipCodeLinearLayout = (LinearLayout) findViewById(R.id.zipCodeLinearLayout);;
-        listView = (ListView) findViewById(R.id.list);
+
+        listView = (RecyclerView) findViewById(R.id.list);
+        listView.setHasFixedSize(true);
+        listView.setLayoutManager(new LinearLayoutManager(this));
+
+        zipCodeLinearLayout = (LinearLayout) findViewById(R.id.zipCodeLinearLayout);
         addZipButton = (Button) findViewById(R.id.button_add_zip);
-
-        listView.setOnItemClickListener(new OnItemClickListener(){
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position,long arg3) {
-				String cityId = WeatherApplication.getCitiesDetails().get(position).getId().toString();
-
-				Intent myIntent = new Intent(getApplicationContext(), WeatherDetailsActivity.class);
-				myIntent.putExtra("cityId", cityId);
-				startActivity(myIntent);
-			}
-
-        });
-
-        //remove a particular list element on a long item click
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-			@Override
-			public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
-			    showDialog( null,
-                            getText(R.string.deleteCityWarningMessage).toString(),
-                            new DialogInterface.OnClickListener(){
-                                public void onClick(DialogInterface arg0, int arg1) {
-                                    deleteCityListItem(pos);
-                                }
-                            },
-                            new DialogInterface.OnClickListener(){
-                                public void onClick(DialogInterface arg0, int arg1) {
-                                }
-                            },
-                        null);
-                return true;
-			}
-		});
 
         addZipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
