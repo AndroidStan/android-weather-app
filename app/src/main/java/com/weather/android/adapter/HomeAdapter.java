@@ -74,10 +74,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 	@Override
 	public HomeAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 		// create a new view
-		/*TextView v = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_text,
-													parent,
-													false);*/
-
 		LinearLayout listItemView = (LinearLayout) LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_text, null);
 
 		ViewHolder vh = new ViewHolder(listItemView);
