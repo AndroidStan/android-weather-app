@@ -34,7 +34,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 		}
 
 		public void bind(final CityDetails item, final OnItemClickListener listener) {
-			//name.setText(item.name);
+
 			itemView.setOnClickListener(new View.OnClickListener() {
 				@Override public void onClick(View v) {
 					listener.onItemClick(item);
