@@ -29,11 +29,10 @@ import java.util.List;
 
 public class HomeActivity extends BaseActivity 
 {
-	private RecyclerView listView;/*ListView*/
+	private RecyclerView recyclerView;
     private Button addZipButton;
     private AutoCompleteTextView autoCompleteTextView;
     private LinearLayout zipCodeLinearLayout;
-	private HomeAdapter homeAdapter;
     private ArrayAdapter<Integer> autoCompleteAdapter;
 
 	private class AsyncParseTask extends AsyncTask <String,Integer,ErrorMessageTO> {
@@ -126,7 +125,7 @@ public class HomeActivity extends BaseActivity
                     for(int i=0; i < numCitiesSameZipCode; i++)
                         WeatherApplication.getCitiesDetails().add(WeatherApplication.getCitiesDetailsBySameZipCode().get(i));
 
-                    homeAdapter.notifyDataSetChanged();
+                    recyclerView.getAdapter().notifyDataSetChanged();
 
                     String cityIdOfTheFirstCityWithThisZipCode = WeatherApplication.getCitiesDetailsBySameZipCode().get(0).getId().toString();
 
@@ -141,7 +140,7 @@ public class HomeActivity extends BaseActivity
 
 	private void setHomeAndAutoCompleteAdapters(){
 
-	    listView.setAdapter(new HomeAdapter(WeatherApplication.getCitiesDetails(), new HomeAdapter.OnItemClickListener() {
+	    recyclerView.setAdapter(new HomeAdapter(WeatherApplication.getCitiesDetails(), new HomeAdapter.OnItemClickListener() {
             @Override public void onItemClick(CityDetails item) {
                 String cityId = item.getId().toString();
 
@@ -194,7 +193,7 @@ public class HomeActivity extends BaseActivity
         //remove an element from the main list each time we perform a long click
         WeatherApplication.getCitiesDetails().remove(cityDetailsToRemove);
 
-        homeAdapter.notifyDataSetChanged();
+        recyclerView.getAdapter().notifyDataSetChanged();
     }
 
 	@Override
@@ -204,9 +203,9 @@ public class HomeActivity extends BaseActivity
 
         autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.enterZipCode);
 
-        listView = (RecyclerView) findViewById(R.id.list);
-        listView.setHasFixedSize(true);
-        listView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView = (RecyclerView) findViewById(R.id.list);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         zipCodeLinearLayout = (LinearLayout) findViewById(R.id.zipCodeLinearLayout);
         addZipButton = (Button) findViewById(R.id.button_add_zip);
