@@ -4,6 +4,7 @@ import com.weather.android.sqliteAsset.AssetSQLiteOpenHelperFactory;
 import com.weather.android.to.WeatherTO;
 import com.weather.android.util.DataBaseHelperUtil;
 import com.weather.android.util.Logger;
+import com.weather.android.util.retrofit.WeatherAPI;
 import com.weather.android.util.room.CityDetails;
 import com.weather.android.util.room.USACitiesDatabase;
 
@@ -19,6 +20,8 @@ import android.util.Log;
 import java.util.List;
 
 import lombok.Data;
+import retrofit2.Retrofit;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 @Data
 public class WeatherApplication extends Application {
@@ -28,7 +31,6 @@ public class WeatherApplication extends Application {
 	private String versionCustomNumber;	// like 1.2.23
 	private int versionSingleIntCode; // like 4
 
-
 	private static WeatherTO weatherDetails;
 	private static DataBaseHelperUtil databaseHelperUtil;
 	private static USACitiesDatabase usaCitiesDatabase;
@@ -36,6 +38,9 @@ public class WeatherApplication extends Application {
 	private static List<CityDetails> citiesDetails;
 	private static List<Integer> suggestedCitiesZips;
 	private static List<CityDetails> citiesDetailsBySameZipCode;
+
+	//private static Retrofit retrofit;
+	private static WeatherAPI weatherApi;
 
 	/*private void copyDatabaseIfNotExist(){
 		try {
@@ -63,6 +68,13 @@ public class WeatherApplication extends Application {
 		super.onCreate();
 		initFields();
 		databaseHelperUtil = new DataBaseHelperUtil(getApplicationContext());
+
+		Retrofit retrofit = new Retrofit.Builder()
+				.baseUrl(WeatherAPI.BASE_URL)
+				.addConverterFactory(JacksonConverterFactory.create())
+				.build();
+
+		weatherApi = retrofit.create(WeatherAPI.class);
 
         //setCountryAndZipCodes();
         //copyDatabaseIfNotExist();
@@ -155,8 +167,12 @@ public class WeatherApplication extends Application {
 	public int getVersionSingleIntCode(){
 		return versionSingleIntCode;
 	}
-	
-	private void initFields(){
+
+    public static WeatherAPI getWeatherApi() {
+        return weatherApi;
+    }
+
+    private void initFields(){
 				
 		try{
 

@@ -10,10 +10,11 @@ buildscript {
         classpath 'android.arch.persistence.room:compiler:1.1.1'
         classpath 'com.android.support:recyclerview-v7:27.1.1'
         classpath 'com.squareup.retrofit2:retrofit:2.4.0'
+        classpath 'com.squareup.retrofit2:converter-jackson:2.4.0'
         classpath 'com.android.tools.build:gradle:3.1.4'
         classpath 'org.projectlombok:lombok:1.18.0'
-        classpath 'com.fasterxml.jackson.core:jackson-core:2.9.0'
-        classpath 'com.fasterxml.jackson.core:jackson-databind:2.9.0'
+        //classpath 'com.fasterxml.jackson.core:jackson-core:2.9.0'
+        //classpath 'com.fasterxml.jackson.core:jackson-databind:2.9.0'
     }
 }
 

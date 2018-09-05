@@ -5,7 +5,7 @@ import com.weather.android.adapter.HomeAdapter;
 import com.weather.android.application.WeatherApplication;
 import com.weather.android.inf.Constants;
 import com.weather.android.to.ErrorMessageTO;
-import com.weather.android.util.DataGatherUtil;
+import com.weather.android.util.RoomUtil;
 import com.weather.android.util.Logger;
 import com.weather.android.util.SystemUtil;
 import com.weather.android.util.room.CityDetails;
@@ -52,12 +52,12 @@ public class HomeActivity extends BaseActivity
 			try {
 
                 if(operationType.equals(Constants.GATHER_INITIAL_DATA)){
-                    List<CityDetails> citiesDetails = DataGatherUtil.getFirstNCities(   getApplicationContext(),
+                    List<CityDetails> citiesDetails = RoomUtil.getFirstNCities(   getApplicationContext(),
                                                                                         Integer.valueOf(asyncParamValue));
                     WeatherApplication.setCitiesDetails(citiesDetails);
 
                     //getting all of the database zipcodes
-                    List<Integer> citiesZips = DataGatherUtil.getAllCitiesZips(getApplicationContext());
+                    List<Integer> citiesZips = RoomUtil.getAllCitiesZips(getApplicationContext());
                     //removing the zip codes which have at least one associated city already pre-populated at the main list
                     for(int i=0; i < citiesDetails.size(); i++){
                         citiesZips.remove(citiesDetails.get(i).getZipcode());
@@ -71,7 +71,7 @@ public class HomeActivity extends BaseActivity
                 if(operationType.equals(Constants.GET_CITIES_IDS_BY_SAME_ZIP)){
                     WeatherApplication.clearCitiesIdsBySameZipCode();
 
-                    List<CityDetails> citiesDetails = DataGatherUtil.getCitiesDetailsBySameZipCode( getApplicationContext(),
+                    List<CityDetails> citiesDetails = RoomUtil.getCitiesDetailsBySameZipCode( getApplicationContext(),
                                                                                                 Integer.valueOf(asyncParamValue));
 
                     WeatherApplication.setCitiesDetailsBySameZipCode(citiesDetails);

@@ -22,7 +22,8 @@ public class WeatherTO
 	 Wind wind;
      Clouds clouds;
 	 private Long dt;
-	 Sys sys;
+
+	Sys sys;
 	 private Integer id;
 	 private String name;
 	 private Integer cod;

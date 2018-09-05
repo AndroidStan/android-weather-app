@@ -9,13 +9,21 @@ import android.widget.TextView;
 import android.os.AsyncTask;
 
 import com.weather.android.application.WeatherApplication;
+import com.weather.android.inf.Constants;
 import com.weather.android.to.*;
 import com.weather.android.util.*;
+import com.weather.android.util.retrofit.WeatherAPI;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class WeatherDetailsActivity extends BaseActivity {
 	private TextView 	textViewCityName,
@@ -25,54 +33,7 @@ public class WeatherDetailsActivity extends BaseActivity {
                         textViewSunrise,
                         textViewSunset;
 	private Button buttonBack;
-	
-	private class AsyncParseTask extends AsyncTask <String,Integer,ErrorMessageTO> {
-		AsyncParseTask() {
-		}
-		
-		protected void onPreExecute() {
-			showProgressDialog(	getText(R.string.progress_title).toString(),
-								R.string.progress_text,
-								this,
-								true);
-		}
-		
-		protected ErrorMessageTO doInBackground(String... urlParams) {
-			ErrorMessageTO errorMessage = null;
-			String 	cityId= urlParams[0];
-			
-			try {
-				WeatherApplication.clearWeather();
-
-				WeatherTO weatherDetails = DataGatherUtil.getWeather(cityId);
-				WeatherApplication.setWeather(weatherDetails);
-			}
-			catch(Exception e) {
-				errorMessage = new ErrorMessageTO(e,getText(R.string.server_data_failure).toString());
-				Logger.e(Log.getStackTraceString(e));
-			}
-		
-			return errorMessage;
-		}
-		
-		protected void onProgressUpdate(Integer... progress) {
-		}
-		 
-		protected void onPostExecute(ErrorMessageTO errorMessage) {
-			dismissDialog();	         
-
-			if(errorMessage != null)
-				createDialogAndHandleTechnicalExceptionAndFinishActivity(errorMessage);
-			else {
-				if(WeatherApplication.getWeatherDetails() == null) {
-					showDialogAndFinishActivity(getText(R.string.no_weather_title).toString(),getText(R.string.no_results).toString());
-					return;
-				}
-
-				populateWeatherDetails();
-			}
-		} 
-	}
+	private String cityId;
 
 	private void populateWeatherDetails(){
 		//set the fields text
@@ -158,8 +119,27 @@ public class WeatherDetailsActivity extends BaseActivity {
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
-            String cityId = extras.getString("cityId");
-            new AsyncParseTask().execute(cityId);
+            cityId = extras.getString("cityId");
         }
+
+		if(cityId != null) {
+            WeatherApplication.clearWeather();
+
+            Call<WeatherTO> call = WeatherApplication.getWeatherApi().getWeather(cityId, Constants.OPEN_WEATHER_MAP_KEY);
+            call.enqueue(new Callback<WeatherTO>() {
+                @Override
+                public void onResponse(Call<WeatherTO> call, Response<WeatherTO> response) {
+                    WeatherApplication.setWeather(response.body());
+                    populateWeatherDetails();
+                }
+
+                @Override
+                public void onFailure(Call<WeatherTO> call, Throwable t) {
+                    WeatherApplication.setWeather(null);
+                    Logger.e(Log.getStackTraceString(t));
+                }
+            });
+        }
+
     }
 }
