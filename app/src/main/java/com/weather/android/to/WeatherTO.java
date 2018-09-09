@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.weather.android.to.subclasses.Coord;
 import com.weather.android.to.subclasses.Main;
+import com.weather.android.to.subclasses.Rain;
 import com.weather.android.to.subclasses.Sys;
 import com.weather.android.to.subclasses.WeatherFields;
 import com.weather.android.to.subclasses.Wind;
@@ -14,19 +15,20 @@ import lombok.Data;
 @Data
 public class WeatherTO 
 {
-	 Coord coord;
-	 ArrayList <WeatherFields> weather = new ArrayList <> ();
-	 private String base;
-	 Main main;
-	 private Integer visibility;
-	 Wind wind;
-     Clouds clouds;
-	 private Long dt;
+	Coord coord;
+	ArrayList <WeatherFields> weather = new ArrayList <> ();
+	private String base;
+	Main main;
+	private Integer visibility;
+	Wind wind;
+	Rain rain;
+	Clouds clouds;
+	private Long dt;
 
 	Sys sys;
-	 private Integer id;
-	 private String name;
-	 private Integer cod;
+	private Integer id;
+	private String name;
+	private Integer cod;
 
 	public void clearWeatherDetails()
 	{
