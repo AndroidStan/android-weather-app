@@ -209,6 +209,7 @@ public class HomeActivity extends BaseActivity
         recyclerView = (RecyclerView) findViewById(R.id.list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //https://stackoverflow.com/questions/24618829/how-to-add-dividers-and-spaces-between-items-in-recyclerview
         //recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.HORIZONTAL));
 
         zipCodeLinearLayout = (LinearLayout) findViewById(R.id.zipCodeLinearLayout);
