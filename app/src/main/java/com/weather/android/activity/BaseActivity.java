@@ -16,6 +16,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -61,7 +62,15 @@ public class BaseActivity extends Activity{
 		}
 	}
 
-	
+	public void showSimpleProgressDialog(String title, int message){
+		progressDialog = new ProgressDialog(this);
+		progressDialog.setIndeterminate(true);
+		progressDialog.setCancelable(false);
+		progressDialog.setTitle(title);
+		progressDialog.setMessage(getText(message).toString());
+		progressDialog.show();
+	}
+
 	public void showProgressDialog(String title, int message, AsyncTask<?,?,?> task, boolean canCancel){
 		currentTask = task;		
 		progressDialog = new ProgressDialog(this); //), R.style.ProgressTheme);
@@ -81,9 +90,15 @@ public class BaseActivity extends Activity{
 		progressDialog.show();
 	}
 	
-	public void dismissDialog() {
+	public void dismissProgressDialog() {
 		if (progressDialog != null){
-			progressDialog.dismiss();
+
+			Handler handler = new Handler();
+			handler.postDelayed(new Runnable() {
+				public void run() {
+					progressDialog.dismiss();
+				}
+			}, 500); // 500 milliseconds delay
 		}
 	}
 
@@ -91,7 +106,7 @@ public class BaseActivity extends Activity{
 	protected void onDestroy() {
 		super.onDestroy();
 		cancelTask(currentTask);		
-		dismissDialog();		
+		dismissProgressDialog();
 		currentTask = null; 
 	}
 	

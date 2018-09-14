@@ -30,8 +30,4 @@ dependencies {
     annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
     compileOnly 'org.projectlombok:lombok:1.18.0'
     annotationProcessor 'org.projectlombok:lombok:1.18.0'
-    //implementation 'com.fasterxml.jackson.core:jackson-core:2.9.0'
-    //annotationProcessor 'com.fasterxml.jackson.core:jackson-core:2.9.0'
-    //implementation 'com.fasterxml.jackson.core:jackson-databind:2.9.0'
-    //annotationProcessor 'com.fasterxml.jackson.core:jackson-databind:2.9.0'
 }

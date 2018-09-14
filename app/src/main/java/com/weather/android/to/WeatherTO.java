@@ -11,21 +11,23 @@ import com.weather.android.to.subclasses.Wind;
 import com.weather.android.to.subclasses.Clouds;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 public class WeatherTO 
 {
-	Coord coord;
-	ArrayList <WeatherFields> weather = new ArrayList <> ();
+	private Coord coord;
+	private ArrayList <WeatherFields> weather = new ArrayList <> ();
 	private String base;
-	Main main;
+	private Main main;
 	private Integer visibility;
-	Wind wind;
-	Rain rain;
-	Clouds clouds;
+	private Wind wind;
+	private Rain rain;
+	private Clouds clouds;
 	private Long dt;
 
-	Sys sys;
+	private Sys sys;
 	private Integer id;
 	private String name;
 	private Integer cod;

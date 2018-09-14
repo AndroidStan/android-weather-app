@@ -11,6 +11,7 @@ import com.weather.android.util.SystemUtil;
 import com.weather.android.util.room.CityDetails;
 
 import android.content.DialogInterface;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +27,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 public class HomeActivity extends BaseActivity 
 {
@@ -91,7 +94,7 @@ public class HomeActivity extends BaseActivity
 		}
 
 		protected void onPostExecute(ErrorMessageTO errorMessage) {
-			dismissDialog();
+			dismissProgressDialog();
 
 			//if there is an exception
 			if(errorMessage.getError() != null)
@@ -206,6 +209,7 @@ public class HomeActivity extends BaseActivity
         recyclerView = (RecyclerView) findViewById(R.id.list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.HORIZONTAL));
 
         zipCodeLinearLayout = (LinearLayout) findViewById(R.id.zipCodeLinearLayout);
         addZipButton = (Button) findViewById(R.id.button_add_zip);

@@ -6,24 +6,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.os.AsyncTask;
 
 import com.weather.android.application.WeatherApplication;
 import com.weather.android.inf.Constants;
 import com.weather.android.to.*;
 import com.weather.android.util.*;
-import com.weather.android.util.retrofit.WeatherAPI;
-
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class WeatherDetailsActivity extends BaseActivity {
 	private TextView 	textViewCityName,
@@ -125,12 +116,16 @@ public class WeatherDetailsActivity extends BaseActivity {
 		if(cityId != null) {
             WeatherApplication.clearWeather();
 
+            showSimpleProgressDialog("Gathering Weather Data", R.string.initializing);
+
             Call<WeatherTO> call = WeatherApplication.getWeatherApi().getWeather(cityId, Constants.OPEN_WEATHER_MAP_KEY);
             call.enqueue(new Callback<WeatherTO>() {
                 @Override
                 public void onResponse(Call<WeatherTO> call, Response<WeatherTO> response) {
                     WeatherApplication.setWeather(response.body());
                     populateWeatherDetails();
+
+                    dismissProgressDialog();
                 }
 
                 @Override
