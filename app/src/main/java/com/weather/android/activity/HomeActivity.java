@@ -11,7 +11,7 @@ import com.weather.android.util.SystemUtil;
 import com.weather.android.util.room.CityDetails;
 
 import android.content.DialogInterface;
-import android.support.v7.widget.DividerItemDecoration;
+import com.weather.android.util.recyclerView.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
@@ -27,8 +27,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import java.util.List;
-
-import static java.security.AccessController.getContext;
 
 public class HomeActivity extends BaseActivity 
 {
@@ -211,6 +209,9 @@ public class HomeActivity extends BaseActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //https://stackoverflow.com/questions/24618829/how-to-add-dividers-and-spaces-between-items-in-recyclerview
         //recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.HORIZONTAL));
+        recyclerView.addItemDecoration(
+                new DividerItemDecoration(getApplicationContext(), R.drawable.recycler_divider));
+
 
         zipCodeLinearLayout = (LinearLayout) findViewById(R.id.zipCodeLinearLayout);
         addZipButton = (Button) findViewById(R.id.button_add_zip);
