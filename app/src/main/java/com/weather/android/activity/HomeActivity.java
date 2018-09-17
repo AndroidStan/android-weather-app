@@ -25,6 +25,7 @@ import android.support.v7.widget.RecyclerView;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -33,7 +34,9 @@ public class HomeActivity extends BaseActivity
 	private RecyclerView recyclerView;
     private Button addZipButton;
     private AutoCompleteTextView autoCompleteTextView;
-    private LinearLayout zipCodeLinearLayout;
+    //private LinearLayout zipCodeLinearLayout;
+    private TextView zipCodeLabel;
+    private AutoCompleteTextView zipCodeAutoComplete;
     private ArrayAdapter<Integer> autoCompleteAdapter;
 
 	private class AsyncParseTask extends AsyncTask <String,Integer,ErrorMessageTO> {
@@ -212,13 +215,16 @@ public class HomeActivity extends BaseActivity
         recyclerView.addItemDecoration(
                 new DividerItemDecoration(getApplicationContext(), R.drawable.recycler_divider));
 
-
-        zipCodeLinearLayout = (LinearLayout) findViewById(R.id.zipCodeLinearLayout);
+        //zipCodeLinearLayout = (LinearLayout) findViewById(R.id.zipCodeLinearLayout);
+        zipCodeLabel = (TextView) findViewById(R.id.zipCodeLabel);
+        zipCodeAutoComplete = (AutoCompleteTextView) findViewById(R.id.enterZipCode);
         addZipButton = (Button) findViewById(R.id.button_add_zip);
 
         addZipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                zipCodeLinearLayout.setVisibility(View.VISIBLE);
+                //zipCodeLinearLayout.setVisibility(View.VISIBLE);
+                zipCodeLabel.setVisibility(View.VISIBLE);
+                zipCodeLabel.setVisibility(View.VISIBLE);
                 autoCompleteTextView.setFocusableInTouchMode(true);
                 autoCompleteTextView.requestFocus();
 

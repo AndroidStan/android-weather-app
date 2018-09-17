@@ -1,66 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout 
-	xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/linearLayout"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/white">
 
-	<include android:id="@+id/headerLayout" layout="@layout/header_layout" />
+	<include
+		android:id="@+id/headerLayout"
+		layout="@layout/header_layout"
+		android:layout_width="0dp"
+		android:layout_height="58dp"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
 
-	<RelativeLayout
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
-		android:orientation="vertical"
-        android:padding="10dp">
 
-        <LinearLayout
-            android:id="@+id/zipCodeLinearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            android:orientation="horizontal"
-            android:layout_centerHorizontal="true"
-            android:padding="5dp">
+    <TextView
+        android:id="@+id/zipCodeLabel"
+        style="@style/Medium.Bold"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/zipCodeLabelText"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/list"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout" />
 
-            <TextView
-                android:id="@+id/zipCodeLabel"
-                style="@style/Medium.Bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/zipCodeLabelText" />
+    <AutoCompleteTextView
+        android:id="@+id/enterZipCode"
+        style="@style/Medium"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:completionThreshold="1"
+        android:inputType="numberDecimal"
+        android:maxLength="5"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout"
+        app:layout_constraintBottom_toTopOf="@+id/list"
+        app:layout_constraintStart_toEndOf="@+id/zipCodeLabel"
+        />
 
-            <AutoCompleteTextView
-                style="@style/Medium"
-                android:inputType="numberDecimal"
-                android:maxLength="5"
-                android:completionThreshold="1"
-                android:layout_width="61dp"
-                android:layout_height="40dp"
-                android:id="@+id/enterZipCode"/>
 
-        </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list"
+        style="@style/global_listview"
+        android:layout_width="364dp"
+        android:layout_height="319dp"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
-        <android.support.v7.widget.RecyclerView android:id="@+id/list"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            style="@style/global_listview"
-            android:layout_marginBottom="5dp"
-            android:layout_below="@+id/zipCodeLinearLayout"
-            android:layout_above="@+id/button_add_zip"/>
+	<Button
+		android:id="@+id/button_add_zip"
+		style="@style/Small.White.Bold"
+		android:layout_width="88dp"
+		android:layout_height="wrap_content"
+		android:background="@drawable/button_light_blue"
+		android:text="@string/button_add_zip"
+		app:layout_constraintTop_toBottomOf="@+id/list"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
 
-		<Button
-            android:id="@+id/button_add_zip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_light_blue"
-            android:text="@string/button_add_zip"
-            style="@style/Small.White.Bold"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true" />
-	</RelativeLayout>
- 
-</LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

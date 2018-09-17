@@ -30,4 +30,5 @@ dependencies {
     annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
     compileOnly 'org.projectlombok:lombok:1.18.0'
     annotationProcessor 'org.projectlombok:lombok:1.18.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
 }
