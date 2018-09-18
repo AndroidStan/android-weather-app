@@ -6,8 +6,8 @@ android {
 
     defaultConfig {
         applicationId "com.weather.android"
-        minSdkVersion 14
-        targetSdkVersion 21
+        minSdkVersion 23
+        targetSdkVersion 27
     }
 
     buildTypes {
@@ -16,6 +16,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -24,10 +25,15 @@ android {
 
 dependencies {
     implementation 'android.arch.persistence.room:runtime:1.1.1'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
+    implementation ('com.google.android.gms:play-services:8.3.0') {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'mediarouter-v7'
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-jackson:2.4.0'
-    annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
     compileOnly 'org.projectlombok:lombok:1.18.0'
     annotationProcessor 'org.projectlombok:lombok:1.18.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'

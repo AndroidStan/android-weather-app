@@ -1,6 +1,8 @@
 package com.weather.android.activity;
 import com.weather.android.R;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,13 +26,18 @@ public class WeatherDetailsActivity extends BaseActivity {
                         textViewSunrise,
                         textViewSunset;
 	private Button buttonBack;
-	private String cityId;
+	private String cityId, cityName;
+	private Double latitude, longtitude;
 
 	private void populateWeatherDetails(){
-		//set the fields text
-		String  formattedCityName = WeatherApplication.getWeatherDetails().getName(),
-                latitude = String.valueOf(WeatherApplication.getWeatherDetails().getCoord().getLat()),
-                longtitude = String.valueOf(WeatherApplication.getWeatherDetails().getCoord().getLon());
+		cityName = WeatherApplication.getWeatherDetails().getName();
+		this.latitude = WeatherApplication.getWeatherDetails().getCoord().getLat();
+		this.longtitude = WeatherApplication.getWeatherDetails().getCoord().getLon();
+
+	    //set the fields text
+		String  formattedCityName = cityName,
+                latitude = String.valueOf(this.latitude),
+                longtitude = String.valueOf(this.longtitude);
 
         formattedCityName += " (" + latitude + ", " + longtitude + ")";
 
@@ -85,6 +92,23 @@ public class WeatherDetailsActivity extends BaseActivity {
 		textViewWeather.setText(weatherDetails);
 	}
 
+	private void addFragment(String cityName, Double latitude, Double longtitude){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        MapFragment mapFragment = new MapFragment();
+
+        Bundle latLng = new Bundle();
+
+        latLng.putString("cityName", cityName);
+        latLng.putDouble("latitude", latitude);
+        latLng.putDouble("longtitude", longtitude);
+
+        mapFragment.setArguments(latLng);
+
+        fragmentTransaction.add(R.id.fragmentContainer, mapFragment);
+        fragmentTransaction.commit();
+    }
+
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -123,7 +147,9 @@ public class WeatherDetailsActivity extends BaseActivity {
                 @Override
                 public void onResponse(Call<WeatherTO> call, Response<WeatherTO> response) {
                     WeatherApplication.setWeather(response.body());
+
                     populateWeatherDetails();
+                    addFragment(cityName, latitude, longtitude);
 
                     dismissProgressDialog();
                 }
@@ -135,6 +161,5 @@ public class WeatherDetailsActivity extends BaseActivity {
                 }
             });
         }
-
     }
 }

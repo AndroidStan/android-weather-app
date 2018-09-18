@@ -10,6 +10,7 @@ import com.weather.android.util.Logger;
 import com.weather.android.util.SystemUtil;
 import com.weather.android.util.room.CityDetails;
 
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import com.weather.android.util.recyclerView.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -248,5 +249,7 @@ public class HomeActivity extends BaseActivity
                                             Constants.GATHER_INITIAL_DATA);
 		else
             setHomeAndAutoCompleteAdapters();
+
+
 	}
 }
