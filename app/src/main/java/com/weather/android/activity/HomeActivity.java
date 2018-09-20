@@ -10,7 +10,7 @@ import com.weather.android.util.Logger;
 import com.weather.android.util.SystemUtil;
 import com.weather.android.util.room.CityDetails;
 
-import android.app.FragmentManager;
+import android.app.ActionBar;
 import android.content.DialogInterface;
 import com.weather.android.util.recyclerView.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,12 +21,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.support.v7.widget.RecyclerView;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.support.constraint.ConstraintLayout;
 
 import java.util.List;
 
@@ -217,8 +217,55 @@ public class HomeActivity extends BaseActivity
                 new DividerItemDecoration(getApplicationContext(), R.drawable.recycler_divider));
 
         //zipCodeLinearLayout = (LinearLayout) findViewById(R.id.zipCodeLinearLayout);
-        zipCodeLabel = (TextView) findViewById(R.id.zipCodeLabel);
+
+        //zipCodeLabel = (TextView) findViewById(R.id.zipCodeLabel);
         zipCodeAutoComplete = (AutoCompleteTextView) findViewById(R.id.enterZipCode);
+
+        zipCodeLabel = new TextView(this);
+        zipCodeLabel.setId(R.id.zipCodeLabel);
+        zipCodeLabel.setTextAppearance(R.style.Medium_Bold);
+        zipCodeLabel.setWidth(0);
+        zipCodeLabel.setHeight(0);
+        zipCodeLabel.setText(R.string.zipCodeLabelText);
+        zipCodeLabel.setVisibility(View.INVISIBLE);
+
+        //android:layout_marginBottom="15dp"
+        //app:layout_constraintBottom_toTopOf="@+id/list"
+        //app:layout_constraintTop_toBottomOf="@+id/headerLayout"
+        ConstraintLayout.LayoutParams constraintParams = new ConstraintLayout.LayoutParams();
+        zipCodeLabel.setLayoutParams(constraintParams);
+
+
+        /*
+        * <TextView
+        android:id="@+id/zipCodeLabel"
+        style="@style/Medium.Bold"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="15dp"
+        android:text="@string/zipCodeLabelText"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/list"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout" />
+
+    <AutoCompleteTextView
+        android:id="@+id/enterZipCode"
+        style="@style/Medium"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:completionThreshold="1"
+        android:inputType="numberDecimal"
+        android:maxLength="5"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/list"
+        app:layout_constraintStart_toEndOf="@+id/zipCodeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout" />
+        *
+        * */
+
         addZipButton = (Button) findViewById(R.id.button_add_zip);
 
         addZipButton.setOnClickListener(new View.OnClickListener() {

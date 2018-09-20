@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/linearLayout"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:background="@color/white">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-	<include
-		android:id="@+id/headerLayout"
-		layout="@layout/header_layout"
-		android:layout_width="0dp"
-		android:layout_height="58dp"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent" />
-
+    <include
+        android:id="@+id/headerLayout"
+        layout="@layout/header_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/list"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+         />
 
     <TextView
         android:id="@+id/zipCodeLabel"
@@ -40,34 +44,37 @@
         android:inputType="numberDecimal"
         android:maxLength="5"
         android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/headerLayout"
         app:layout_constraintBottom_toTopOf="@+id/list"
         app:layout_constraintStart_toEndOf="@+id/zipCodeLabel"
-        />
-
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list"
         style="@style/global_listview"
-        android:layout_width="364dp"
-        android:layout_height="319dp"
+        android:layout_width="0dp"
+        app:layout_constraintWidth_default="wrap"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:scrollbars="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/headerLayout"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_add_zip"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout" />
 
-	<Button
-		android:id="@+id/button_add_zip"
-		style="@style/Small.White.Bold"
-		android:layout_width="88dp"
-		android:layout_height="wrap_content"
-		android:background="@drawable/button_light_blue"
-		android:text="@string/button_add_zip"
-		app:layout_constraintTop_toBottomOf="@+id/list"
+    <Button
+        android:id="@+id/button_add_zip"
+        style="@style/Small.White.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_light_blue"
+        android:text="@string/button_add_zip"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
-
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
