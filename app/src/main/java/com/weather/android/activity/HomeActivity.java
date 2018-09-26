@@ -13,7 +13,11 @@ import com.weather.android.util.room.CityDetails;
 import android.app.ActionBar;
 import android.content.DialogInterface;
 import com.weather.android.util.recyclerView.DividerItemDecoration;
+
+import android.support.constraint.ConstraintSet;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,7 +41,7 @@ public class HomeActivity extends BaseActivity
     private AutoCompleteTextView autoCompleteTextView;
     //private LinearLayout zipCodeLinearLayout;
     private TextView zipCodeLabel;
-    private AutoCompleteTextView zipCodeAutoComplete;
+    //private AutoCompleteTextView zipCodeAutoComplete;
     private ArrayAdapter<Integer> autoCompleteAdapter;
 
 	private class AsyncParseTask extends AsyncTask <String,Integer,ErrorMessageTO> {
@@ -206,20 +210,24 @@ public class HomeActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home);
 
-        autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.enterZipCode);
-
         recyclerView = (RecyclerView) findViewById(R.id.list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //https://stackoverflow.com/questions/24618829/how-to-add-dividers-and-spaces-between-items-in-recyclerview
-        //recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.HORIZONTAL));
-        recyclerView.addItemDecoration(
-                new DividerItemDecoration(getApplicationContext(), R.drawable.recycler_divider));
+        recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), R.drawable.recycler_divider));
 
         //zipCodeLinearLayout = (LinearLayout) findViewById(R.id.zipCodeLinearLayout);
 
         //zipCodeLabel = (TextView) findViewById(R.id.zipCodeLabel);
-        zipCodeAutoComplete = (AutoCompleteTextView) findViewById(R.id.enterZipCode);
+        //zipCodeAutoComplete = (AutoCompleteTextView) findViewById(R.id.enterZipCode);
+
+        ConstraintLayout constraintLayout = (ConstraintLayout)findViewById(R.id.constraintLayout);
+
+        ConstraintLayout.LayoutParams constraintParams = new ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                ConstraintLayout.LayoutParams.WRAP_CONTENT
+        );
+
+        ConstraintSet constraintSet = new ConstraintSet();
 
         zipCodeLabel = new TextView(this);
         zipCodeLabel.setId(R.id.zipCodeLabel);
@@ -229,42 +237,46 @@ public class HomeActivity extends BaseActivity
         zipCodeLabel.setText(R.string.zipCodeLabelText);
         zipCodeLabel.setVisibility(View.INVISIBLE);
 
-        //android:layout_marginBottom="15dp"
-        //app:layout_constraintBottom_toTopOf="@+id/list"
-        //app:layout_constraintTop_toBottomOf="@+id/headerLayout"
-        ConstraintLayout.LayoutParams constraintParams = new ConstraintLayout.LayoutParams();
+        constraintParams.topToBottom = R.id.headerLayout;
+        constraintParams.bottomToTop = R.id.list;
+        constraintParams.bottomMargin = 15;
+
         zipCodeLabel.setLayoutParams(constraintParams);
 
+        constraintLayout.addView(zipCodeLabel,0);
+        constraintSet.clone(constraintLayout);
+        constraintSet.connect(zipCodeLabel.getId(), ConstraintSet.TOP, constraintLayout.getId(), ConstraintSet.TOP, 60);
+        constraintSet.applyTo(constraintLayout);
 
-        /*
-        * <TextView
-        android:id="@+id/zipCodeLabel"
-        style="@style/Medium.Bold"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="15dp"
-        android:text="@string/zipCodeLabelText"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/list"
-        app:layout_constraintTop_toBottomOf="@+id/headerLayout" />
+        autoCompleteTextView = new AutoCompleteTextView(this);//(AutoCompleteTextView) findViewById(R.id.enterZipCode);
+        autoCompleteTextView.setId(R.id.enterZipCode);
+        autoCompleteTextView.setTextAppearance(R.style.Medium);
+        autoCompleteTextView.setWidth(0);
+        autoCompleteTextView.setHeight(0);
+        autoCompleteTextView.setThreshold(1);
+        autoCompleteTextView.setInputType(InputType.TYPE_CLASS_NUMBER);
 
-    <AutoCompleteTextView
-        android:id="@+id/enterZipCode"
-        style="@style/Medium"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="18dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:completionThreshold="1"
-        android:inputType="numberDecimal"
-        android:maxLength="5"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/list"
-        app:layout_constraintStart_toEndOf="@+id/zipCodeLabel"
-        app:layout_constraintTop_toBottomOf="@+id/headerLayout" />
-        *
-        * */
+        InputFilter[] numSymbolsFilters = new InputFilter[1];
+        numSymbolsFilters[0] = new InputFilter.LengthFilter(5);
+
+        autoCompleteTextView.setFilters(numSymbolsFilters);
+        autoCompleteTextView.setVisibility(View.INVISIBLE);
+
+        constraintParams.topMargin = 15;
+        constraintParams.bottomMargin = 15;
+        constraintParams.leftMargin = 15;
+        constraintParams.rightMargin = 15;
+
+        constraintParams.topToBottom = R.id.headerLayout;
+        constraintParams.bottomToTop = R.id.list;
+        constraintParams.startToEnd = R.id.zipCodeLabel;
+
+        autoCompleteTextView.setLayoutParams(constraintParams);
+
+        constraintLayout.addView(autoCompleteTextView,0);
+        constraintSet.clone(constraintLayout);
+        constraintSet.connect(autoCompleteTextView.getId(), ConstraintSet.TOP, constraintLayout.getId(), ConstraintSet.TOP, 60);
+        constraintSet.applyTo(constraintLayout);
 
         addZipButton = (Button) findViewById(R.id.button_add_zip);
 

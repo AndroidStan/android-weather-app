@@ -1,138 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout 	xmlns:android="http://schemas.android.com/apk/res/android"
-    			android:layout_width="match_parent"
-    			android:layout_height="match_parent"
-    			android:orientation="vertical"
-    			android:background="@color/white">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
     			
-    <include android:id="@+id/headerLayout" layout="@layout/header_layout" />
-        
-     <LinearLayout 
-    	android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-    	android:orientation="vertical"
-    	android:padding="5dp">
+    <include    android:id="@+id/headerLayout"
+                layout="@layout/header_layout"
+                app:layout_constraintVertical_chainStyle="spread"/>
 
-		 <LinearLayout
-			 android:layout_width="match_parent"
-			 android:layout_height="wrap_content"
-			 android:orientation="horizontal"
-			 android:padding="5dp">
-			 <TextView android:id="@+id/cityNameLabel"
-				 style="@style/Small.Bold"
-				 android:layout_width="wrap_content"
-				 android:layout_height="wrap_content"
-				 android:text="@string/city_name" />
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout"
+        app:layout_constraintBottom_toTopOf="@+id/button_back">
 
-			 <TextView android:id="@+id/cityName"
-				 style="@style/Small"
-				 android:gravity="center_horizontal"
-				 android:layout_width="wrap_content"
-				 android:layout_height="wrap_content"
-				 android:paddingLeft="10dip" />
-		 </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:padding="5dp">
 
-         <FrameLayout
-             android:layout_width="match_parent"
-             android:layout_height="200dp"
-             android:id="@+id/fragmentContainer"
-             android:layout_margin="5dp" />
-
-		 <LinearLayout
-			 android:layout_width="match_parent"
-			 android:layout_height="wrap_content"
-			 android:orientation="horizontal"
-			 android:padding="5dp">
-			 <TextView android:id="@+id/lastUpdatedTimeLabel"
-				 style="@style/Small.Bold"
-				 android:layout_width="wrap_content"
-				 android:layout_height="wrap_content"
-				 android:text="@string/lastUpdatedTime" />
-
-			 <TextView android:id="@+id/lastUpdatedTimeTextView"
-				 style="@style/Small"
-				 android:gravity="center_horizontal"
-				 android:layout_width="wrap_content"
-				 android:layout_height="wrap_content"
-				 android:paddingLeft="10dip" />
-		 </LinearLayout>
-
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:orientation="horizontal"
-             android:padding="5dp">
-             <TextView android:id="@+id/cityTemperatureLabel"
-                 style="@style/Small.Bold"
-                 android:layout_width="wrap_content"
+             <LinearLayout
+                 android:layout_width="match_parent"
                  android:layout_height="wrap_content"
-                 android:text="@string/city_temperature" />
+                 android:orientation="horizontal"
+                 android:padding="5dp">
+                 <TextView android:id="@+id/cityNameLabel"
+                     style="@style/Small.Bold"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/city_name" />
 
-             <TextView android:id="@+id/cityTemperature"
-                 style="@style/Small"
-                 android:layout_width="wrap_content"
+                 <TextView android:id="@+id/cityName"
+                     style="@style/Small"
+                     android:gravity="center_horizontal"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:paddingLeft="10dip" />
+             </LinearLayout>
+
+             <FrameLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="200dp"
+                 android:id="@+id/fragmentContainer"
+                 android:layout_margin="5dp" />
+
+             <LinearLayout
+                 android:layout_width="match_parent"
                  android:layout_height="wrap_content"
-                 android:paddingLeft="10dip" />
+                 android:orientation="horizontal"
+                 android:padding="5dp">
+                 <TextView android:id="@+id/lastUpdatedTimeLabel"
+                     style="@style/Small.Bold"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/lastUpdatedTime" />
+
+                 <TextView android:id="@+id/lastUpdatedTimeTextView"
+                     style="@style/Small"
+                     android:gravity="center_horizontal"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:paddingLeft="10dip" />
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                 android:padding="5dp">
+                 <TextView android:id="@+id/cityTemperatureLabel"
+                     style="@style/Small.Bold"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/city_temperature" />
+
+                 <TextView android:id="@+id/cityTemperature"
+                     style="@style/Small"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:paddingLeft="10dip" />
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                 android:padding="5dp">
+                 <TextView android:id="@+id/sunRiseLabel"
+                     style="@style/Small.Bold"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/sunRiseLabelText" />
+
+                 <TextView android:id="@+id/sunRiseTextView"
+                     style="@style/Small"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:paddingLeft="10dip" />
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                 android:padding="5dp">
+                 <TextView android:id="@+id/sunSetLabel"
+                     style="@style/Small.Bold"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/sunSetLabelText" />
+
+                 <TextView android:id="@+id/sunSetTextView"
+                     style="@style/Small"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:paddingLeft="10dip" />
+             </LinearLayout>
+
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="horizontal"
+                 android:padding="5dp">
+                 <TextView
+                     android:id="@+id/weatherLabel"
+                     style="@style/Small.Bold"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/weatherLabel" />
+
+                 <TextView android:id="@+id/weather"
+                     style="@style/Small"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:paddingLeft="10dip" />
+             </LinearLayout>
+
          </LinearLayout>
 
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:orientation="horizontal"
-             android:padding="5dp">
-             <TextView android:id="@+id/sunRiseLabel"
-                 style="@style/Small.Bold"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="@string/sunRiseLabelText" />
-
-             <TextView android:id="@+id/sunRiseTextView"
-                 style="@style/Small"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:paddingLeft="10dip" />
-         </LinearLayout>
-
-         <LinearLayout
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:orientation="horizontal"
-             android:padding="5dp">
-             <TextView android:id="@+id/sunSetLabel"
-                 style="@style/Small.Bold"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="@string/sunSetLabelText" />
-
-             <TextView android:id="@+id/sunSetTextView"
-                 style="@style/Small"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:paddingLeft="10dip" />
-         </LinearLayout>
-
-
-         <LinearLayout
-			 android:layout_width="match_parent"
-			 android:layout_height="wrap_content"
-			 android:orientation="horizontal"
-			 android:padding="5dp">
-			 <TextView
-				 android:id="@+id/weatherLabel"
-				 style="@style/Small.Bold"
-				 android:layout_width="wrap_content"
-				 android:layout_height="wrap_content"
-				 android:text="@string/weatherLabel" />
-
-			 <TextView android:id="@+id/weather"
-				 style="@style/Small"
-				 android:layout_width="wrap_content"
-				 android:layout_height="wrap_content"
-				 android:paddingLeft="10dip" />
-		 </LinearLayout>
-
-	 </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/button_back"
@@ -140,10 +154,13 @@
         android:layout_height="wrap_content"
         style="@style/Small.White.Bold"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/button_light_blue"
-        android:text="@string/button_back_title"/>
-     	    
-</LinearLayout>
+        android:text="@string/button_back_title"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+</android.support.constraint.ConstraintLayout>
