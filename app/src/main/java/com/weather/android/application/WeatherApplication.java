@@ -8,6 +8,7 @@ import com.weather.android.util.retrofit.WeatherAPI;
 import com.weather.android.util.room.CityDetails;
 import com.weather.android.util.room.USACitiesDatabase;
 
+import android.app.Activity;
 import android.app.Application;
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Room;
@@ -38,6 +39,7 @@ public class WeatherApplication extends Application {
 	private static List<CityDetails> citiesDetails;
 	private static List<Integer> suggestedCitiesZips;
 	private static List<CityDetails> citiesDetailsBySameZipCode;
+	private static Activity appCurrentActivity;
 
 	//private static Retrofit retrofit;
 	private static WeatherAPI weatherApi;
@@ -105,6 +107,14 @@ public class WeatherApplication extends Application {
 													.build();
 
 		return usaCitiesDatabase;
+	}
+
+	public static void setCurrentActivity(Activity currentActivity){
+		appCurrentActivity = currentActivity;
+	}
+
+	public static Activity getCurrentActivity(){
+		return appCurrentActivity;
 	}
 
 	private static void closeRoomDatabase(){

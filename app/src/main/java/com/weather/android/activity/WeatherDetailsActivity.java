@@ -14,9 +14,14 @@ import com.weather.android.inf.Constants;
 import com.weather.android.to.*;
 import com.weather.android.util.*;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static java.lang.Thread.sleep;
+
 
 public class WeatherDetailsActivity extends BaseActivity {
 	private TextView 	textViewCityName,
@@ -83,11 +88,20 @@ public class WeatherDetailsActivity extends BaseActivity {
 
 		Double windSpeed = WeatherApplication.getWeatherDetails().getWind().getSpeed();
 
-        weatherDetails += "\r\nPressure: " + pressure.toString() + " hPa"
-                        + "\r\nHumidity: " + humidity.toString() + " %"
-                        + "\r\nVisibility: " + visibility.toString() + " meters"
-                        + "\r\nCloudiness: " + cloudiness.toString() + " %"
-                        + "\r\nWind Speed: " + windSpeed.toString() + " m/s";
+        if(pressure != null)
+            weatherDetails += "\r\nPressure: " + pressure.toString() + " hPa";
+
+        if(humidity != null)
+            weatherDetails += "\r\nHumidity: " + humidity.toString() + " %";
+
+        if(visibility != null)
+            weatherDetails += "\r\nVisibility: " + visibility.toString() + " meters";
+
+        if(cloudiness != null)
+            weatherDetails += "\r\nCloudiness: " + cloudiness.toString() + " %";
+
+        if(windSpeed != null)
+            weatherDetails +=  "\r\nWind Speed: " + windSpeed.toString() + " m/s";
 
 		textViewWeather.setText(weatherDetails);
 	}
@@ -109,11 +123,30 @@ public class WeatherDetailsActivity extends BaseActivity {
         fragmentTransaction.commit();
     }
 
-	/** Called when the activity is first created. */
+    public void goBack() {
+        WeatherApplication.getCurrentActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                // Code which runs on MAIN UI thread
+                dismissProgressDialog();
+
+                try {
+                    sleep(600);
+                }catch(InterruptedException e){
+
+                }
+
+                finish();
+            }
+        });
+    }
+
+    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
        	super.onCreate(savedInstanceState);
     	setContentView(R.layout.weather_details);
+
+        WeatherApplication.setCurrentActivity(this);
 
         textViewCityName = (TextView) findViewById(R.id.cityName);
         textViewCityTemperature = (TextView) findViewById(R.id.cityTemperature);
@@ -124,10 +157,8 @@ public class WeatherDetailsActivity extends BaseActivity {
 
         buttonBack = (Button) findViewById(R.id.button_back);
 
-        buttonBack.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View view)
-            {
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
                 finish();
             }
         });
@@ -158,6 +189,26 @@ public class WeatherDetailsActivity extends BaseActivity {
                 public void onFailure(Call<WeatherTO> call, Throwable t) {
                     WeatherApplication.setWeather(null);
                     Logger.e(Log.getStackTraceString(t));
+
+                    if (t instanceof IOException)
+                        makeLongToast("Internet connection error");
+
+                    //goBack();
+
+                    //500 ms delay at the following method below
+                    //in order the progress to be visible
+                    //even at the quickest get(s)
+                    dismissProgressDialog();
+
+                    try {
+                        //waiting 100 milliseconds more (500+100) the progress dialogue to be closed
+                        sleep(600);
+                    }catch(InterruptedException e){
+
+                    }
+
+                    //finish the activity after the progress dialog was closed in order not to leak
+                    finish();
                 }
             });
         }
