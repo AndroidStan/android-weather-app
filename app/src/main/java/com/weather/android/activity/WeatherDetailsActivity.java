@@ -129,11 +129,7 @@ public class WeatherDetailsActivity extends BaseActivity {
                 // Code which runs on MAIN UI thread
                 dismissProgressDialog();
 
-                try {
-                    sleep(600);
-                }catch(InterruptedException e){
-
-                }
+                SystemUtil.sleepForMillis(600);
 
                 finish();
             }
@@ -200,12 +196,8 @@ public class WeatherDetailsActivity extends BaseActivity {
                     //even at the quickest get(s)
                     dismissProgressDialog();
 
-                    try {
-                        //waiting 100 milliseconds more (500+100) the progress dialogue to be closed
-                        sleep(600);
-                    }catch(InterruptedException e){
-
-                    }
+                    //waiting 100 milliseconds more (500+100) the progress dialogue to be closed
+                    SystemUtil.sleepForMillis(600);
 
                     //finish the activity after the progress dialog was closed in order not to leak
                     finish();

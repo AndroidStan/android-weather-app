@@ -10,7 +10,6 @@ import com.weather.android.util.Logger;
 import com.weather.android.util.SystemUtil;
 import com.weather.android.util.room.CityDetails;
 
-import android.app.ActionBar;
 import android.content.DialogInterface;
 import com.weather.android.util.recyclerView.DividerItemDecoration;
 
@@ -33,6 +32,8 @@ import android.widget.TextView;
 import android.support.constraint.ConstraintLayout;
 
 import java.util.List;
+
+import static android.support.constraint.solver.widgets.ConstraintWidget.CHAIN_PACKED;
 
 public class HomeActivity extends BaseActivity 
 {
@@ -222,6 +223,36 @@ public class HomeActivity extends BaseActivity
         //zipCodeLabel = (TextView) findViewById(R.id.zipCodeLabel);
         //zipCodeAutoComplete = (AutoCompleteTextView) findViewById(R.id.enterZipCode);
 
+        /*<TextView
+        android:id="@+id/zipCodeLabel"
+        style="@style/Medium.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:text="@string/zipCodeLabelText"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/list"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout" />
+
+    <AutoCompleteTextView
+        android:id="@+id/enterZipCode"
+        style="@style/Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:completionThreshold="1"
+        android:inputType="numberDecimal"
+        android:maxLength="5"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintBottom_toTopOf="@+id/list"
+        app:layout_constraintStart_toEndOf="@+id/zipCodeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout" />
+        */
+
         ConstraintLayout constraintLayout = (ConstraintLayout)findViewById(R.id.constraintLayout);
 
         ConstraintLayout.LayoutParams constraintParams = new ConstraintLayout.LayoutParams(
@@ -234,27 +265,33 @@ public class HomeActivity extends BaseActivity
         zipCodeLabel = new TextView(this);
         zipCodeLabel.setId(R.id.zipCodeLabel);
         zipCodeLabel.setTextAppearance(R.style.Medium_Bold);
-        zipCodeLabel.setWidth(0);
-        zipCodeLabel.setHeight(0);
         zipCodeLabel.setText(R.string.zipCodeLabelText);
+        zipCodeLabel.setWidth(1000);
+        zipCodeLabel.setHeight(60);
         zipCodeLabel.setVisibility(View.INVISIBLE);
 
-        constraintParams.topToBottom = R.id.headerLayout;
-        constraintParams.bottomToTop = R.id.list;
-        constraintParams.bottomMargin = 15;
+        constraintParams.verticalChainStyle = CHAIN_PACKED;
+        //constraintParams.topToBottom = R.id.headerLayout;
+        //constraintParams.bottomToTop = R.id.list;
+        //constraintParams.startToStart = R.id.list;
+        //constraintParams.topMargin = 50;
+        //constraintParams.bottomMargin = 50;
 
         zipCodeLabel.setLayoutParams(constraintParams);
 
-        constraintLayout.addView(zipCodeLabel,0);
+        constraintLayout.addView(zipCodeLabel,1);
         constraintSet.clone(constraintLayout);
-        constraintSet.connect(zipCodeLabel.getId(), ConstraintSet.TOP, constraintLayout.getId(), ConstraintSet.TOP, 60);
+        constraintSet.connect(zipCodeLabel.getId(), ConstraintSet.LEFT, R.id.list, ConstraintSet.LEFT, 0);
+        constraintSet.connect(zipCodeLabel.getId(), ConstraintSet.RIGHT, R.id.enterZipCode, ConstraintSet.LEFT, 0);
+        constraintSet.connect(zipCodeLabel.getId(), ConstraintSet.TOP, R.id.headerLayout, ConstraintSet.BOTTOM, 0);
+        constraintSet.connect(zipCodeLabel.getId(), ConstraintSet.BOTTOM, R.id.list, ConstraintSet.TOP, 0);
         constraintSet.applyTo(constraintLayout);
 
         autoCompleteTextView = new AutoCompleteTextView(this);//(AutoCompleteTextView) findViewById(R.id.enterZipCode);
         autoCompleteTextView.setId(R.id.enterZipCode);
         autoCompleteTextView.setTextAppearance(R.style.Medium);
-        autoCompleteTextView.setWidth(0);
-        autoCompleteTextView.setHeight(0);
+        //autoCompleteTextView.setWidth(300);
+        //autoCompleteTextView.setHeight(60);
         autoCompleteTextView.setThreshold(1);
         autoCompleteTextView.setInputType(InputType.TYPE_CLASS_NUMBER);
 
@@ -269,15 +306,18 @@ public class HomeActivity extends BaseActivity
         constraintParams.leftMargin = 15;
         constraintParams.rightMargin = 15;
 
-        constraintParams.topToBottom = R.id.headerLayout;
-        constraintParams.bottomToTop = R.id.list;
-        constraintParams.startToEnd = R.id.zipCodeLabel;
+        constraintParams.horizontalChainStyle = CHAIN_PACKED;
+        //constraintParams.topToBottom = R.id.headerLayout;
+        //constraintParams.bottomToTop = R.id.list;
+        //constraintParams.leftToRight = R.id.zipCodeLabel;
 
         autoCompleteTextView.setLayoutParams(constraintParams);
 
-        constraintLayout.addView(autoCompleteTextView,0);
+        constraintLayout.addView(autoCompleteTextView,2);
         constraintSet.clone(constraintLayout);
-        constraintSet.connect(autoCompleteTextView.getId(), ConstraintSet.TOP, constraintLayout.getId(), ConstraintSet.TOP, 60);
+        constraintSet.connect(autoCompleteTextView.getId(), ConstraintSet.TOP, R.id.headerLayout, ConstraintSet.BOTTOM, 10);
+        constraintSet.connect(autoCompleteTextView.getId(), ConstraintSet.BOTTOM, R.id.list, ConstraintSet.TOP, 10);
+        constraintSet.connect(autoCompleteTextView.getId(), ConstraintSet.LEFT, R.id.zipCodeLabel, ConstraintSet.RIGHT, 10);
         constraintSet.applyTo(constraintLayout);
 
         addZipButton = (Button) findViewById(R.id.button_add_zip);
@@ -286,7 +326,7 @@ public class HomeActivity extends BaseActivity
             public void onClick(View view) {
                 //zipCodeLinearLayout.setVisibility(View.VISIBLE);
                 zipCodeLabel.setVisibility(View.VISIBLE);
-                zipCodeLabel.setVisibility(View.VISIBLE);
+                autoCompleteTextView.setVisibility(View.VISIBLE);
                 autoCompleteTextView.setFocusableInTouchMode(true);
                 autoCompleteTextView.requestFocus();
 

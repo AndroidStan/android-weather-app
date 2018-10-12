@@ -22,6 +22,8 @@ import android.text.style.URLSpan;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 
+import static java.lang.Thread.sleep;
+
 public class SystemUtil {
 
 	public static boolean call(Context context, String number){
@@ -134,5 +136,12 @@ public class SystemUtil {
 
 		return sdf.format(date);
 	}
-	
+
+	public static void sleepForMillis(long milliseconds){
+		try {
+			sleep(milliseconds);
+		}catch(InterruptedException e){
+
+		}
+	}
 }
