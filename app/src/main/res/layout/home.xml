@@ -29,35 +29,6 @@
         app:layout_constraintTop_toBottomOf="@+id/headerLayout"
         app:layout_constraintBottom_toTopOf="@+id/list" />
 
-<!--    <TextView
-        android:id="@+id/zipCodeLabel"
-        style="@style/Medium.Bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
-        android:text="@string/zipCodeLabelText"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/list"
-        app:layout_constraintTop_toBottomOf="@+id/headerLayout" />
-
-    <AutoCompleteTextView
-        android:id="@+id/enterZipCode"
-        style="@style/Medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="18dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:completionThreshold="1"
-        android:inputType="numberDecimal"
-        android:maxLength="5"
-        app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintBottom_toTopOf="@+id/list"
-        app:layout_constraintStart_toEndOf="@+id/zipCodeLabel"
-        app:layout_constraintTop_toBottomOf="@+id/headerLayout" /> -->
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list"
         style="@style/global_listview"
