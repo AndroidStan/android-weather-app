@@ -29,6 +29,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
+
 import java.util.List;
 
 public class HomeActivity extends BaseActivity 
@@ -239,15 +243,30 @@ public class HomeActivity extends BaseActivity
 
         addZipButton = (Button) findViewById(R.id.button_add_zip);
 
+        KeyboardVisibilityEvent.setEventListener(
+                this,
+                new KeyboardVisibilityEventListener() {
+                    @Override
+                    public void onVisibilityChanged(boolean isOpen) {
+                        // some code depending on keyboard visiblity status
+                        if(isOpen){
+                            zipCodeLinearLayout.addView(zipCodeLabel);
+
+                            autoCompleteTextView.requestFocus();
+                            zipCodeLinearLayout.addView(autoCompleteTextView);
+                        }else zipCodeLinearLayout.removeAllViews();
+                    }
+                });
+
         addZipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                if(zipCodeLinearLayout.getChildCount() == 0) {
+                /*if(zipCodeLinearLayout.getChildCount() == 0) {
                     zipCodeLinearLayout.addView(zipCodeLabel);
 
                     autoCompleteTextView.requestFocus();
                     zipCodeLinearLayout.addView(autoCompleteTextView);
                 } else
-                    zipCodeLinearLayout.removeAllViews();
+                    zipCodeLinearLayout.removeAllViews();*/
 
                 SystemUtil.showSoftKeyboard(HomeActivity.this);
             }
