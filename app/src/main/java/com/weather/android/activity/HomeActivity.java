@@ -241,8 +241,6 @@ public class HomeActivity extends BaseActivity
         autoCompleteTextView.setWidth(300);
         autoCompleteTextView.setHeight(60);
 
-        addZipButton = (Button) findViewById(R.id.button_add_zip);
-
         KeyboardVisibilityEvent.setEventListener(
                 this,
                 new KeyboardVisibilityEventListener() {
@@ -258,16 +256,9 @@ public class HomeActivity extends BaseActivity
                     }
                 });
 
+        addZipButton = (Button) findViewById(R.id.button_add_zip);
         addZipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                /*if(zipCodeLinearLayout.getChildCount() == 0) {
-                    zipCodeLinearLayout.addView(zipCodeLabel);
-
-                    autoCompleteTextView.requestFocus();
-                    zipCodeLinearLayout.addView(autoCompleteTextView);
-                } else
-                    zipCodeLinearLayout.removeAllViews();*/
-
                 SystemUtil.showSoftKeyboard(HomeActivity.this);
             }
         });
