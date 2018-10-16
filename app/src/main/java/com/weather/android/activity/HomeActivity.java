@@ -28,6 +28,7 @@ import android.support.v7.widget.RecyclerView;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.support.constraint.ConstraintLayout;
 
@@ -39,9 +40,9 @@ public class HomeActivity extends BaseActivity
 {
 	private RecyclerView recyclerView;
     private Button addZipButton;
-    private AutoCompleteTextView autoCompleteTextView;
-    //private LinearLayout zipCodeLinearLayout;
+    private LinearLayout zipCodeLinearLayout;
     private TextView zipCodeLabel;
+    private AutoCompleteTextView autoCompleteTextView;
     //private AutoCompleteTextView zipCodeAutoComplete;
     private ArrayAdapter<Integer> autoCompleteAdapter;
 
@@ -218,7 +219,27 @@ public class HomeActivity extends BaseActivity
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), R.drawable.recycler_divider));
 
-        //zipCodeLinearLayout = (LinearLayout) findViewById(R.id.zipCodeLinearLayout);
+        zipCodeLinearLayout = (LinearLayout) findViewById(R.id.zipCodeLinearLayout);
+
+        zipCodeLabel = new TextView(this);
+        zipCodeLabel.setId(R.id.zipCodeLabel);
+        zipCodeLabel.setTextAppearance(R.style.Medium_Bold);
+        zipCodeLabel.setText(R.string.zipCodeLabelText);
+        zipCodeLabel.setWidth(300);
+        zipCodeLabel.setHeight(60);
+
+        autoCompleteTextView = new AutoCompleteTextView(this);//(AutoCompleteTextView) findViewById(R.id.enterZipCode);
+        autoCompleteTextView.setId(R.id.enterZipCode);
+        autoCompleteTextView.setTextAppearance(R.style.Medium);
+        autoCompleteTextView.setThreshold(1);
+        autoCompleteTextView.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+        InputFilter[] numSymbolsFilters = new InputFilter[1];
+        numSymbolsFilters[0] = new InputFilter.LengthFilter(5);
+
+        autoCompleteTextView.setFilters(numSymbolsFilters);
+        autoCompleteTextView.setWidth(300);
+        autoCompleteTextView.setHeight(60);
 
         //zipCodeLabel = (TextView) findViewById(R.id.zipCodeLabel);
         //zipCodeAutoComplete = (AutoCompleteTextView) findViewById(R.id.enterZipCode);
@@ -253,7 +274,7 @@ public class HomeActivity extends BaseActivity
         app:layout_constraintTop_toBottomOf="@+id/headerLayout" />
         */
 
-        ConstraintLayout constraintLayout = (ConstraintLayout)findViewById(R.id.constraintLayout);
+        /*ConstraintLayout constraintLayout = (ConstraintLayout)findViewById(R.id.constraintLayout);
 
         ConstraintLayout.LayoutParams constraintParams = new ConstraintLayout.LayoutParams(
                 ConstraintLayout.LayoutParams.WRAP_CONTENT,
@@ -318,17 +339,20 @@ public class HomeActivity extends BaseActivity
         constraintSet.connect(autoCompleteTextView.getId(), ConstraintSet.TOP, R.id.headerLayout, ConstraintSet.BOTTOM, 10);
         constraintSet.connect(autoCompleteTextView.getId(), ConstraintSet.BOTTOM, R.id.list, ConstraintSet.TOP, 10);
         constraintSet.connect(autoCompleteTextView.getId(), ConstraintSet.LEFT, R.id.zipCodeLabel, ConstraintSet.RIGHT, 10);
-        constraintSet.applyTo(constraintLayout);
+        constraintSet.applyTo(constraintLayout);*/
 
         addZipButton = (Button) findViewById(R.id.button_add_zip);
 
         addZipButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 //zipCodeLinearLayout.setVisibility(View.VISIBLE);
-                zipCodeLabel.setVisibility(View.VISIBLE);
-                autoCompleteTextView.setVisibility(View.VISIBLE);
+                //zipCodeLabel.setVisibility(View.VISIBLE);
+                //autoCompleteTextView.setVisibility(View.VISIBLE);
                 autoCompleteTextView.setFocusableInTouchMode(true);
                 autoCompleteTextView.requestFocus();
+
+                zipCodeLinearLayout.addView(zipCodeLabel);
+                zipCodeLinearLayout.addView(autoCompleteTextView);
 
                 SystemUtil.showSoftKeyboard(HomeActivity.this);
             }
