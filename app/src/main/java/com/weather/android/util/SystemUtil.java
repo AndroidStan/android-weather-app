@@ -13,6 +13,7 @@ import com.weather.android.to.TemperatureTO;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.inputmethodservice.InputMethodService;
 import android.net.Uri;
 import android.telephony.PhoneNumberUtils;
 import android.text.SpannableString;
@@ -104,16 +105,6 @@ public class SystemUtil {
 		
 		return flag;
 		
-	}
-
-	public static void showSoftKeyboard(Activity activity){
-		InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
-	}
-
-	public static void hideSoftKeyboard(Activity activity){
-		InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY,0);
 	}
 
 	public static TemperatureTO convertFromKelvinToFahrenheitAndCelcius(Double kelvinTemp){

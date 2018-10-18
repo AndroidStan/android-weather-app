@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.HomeActivity" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:name=".activity.HomeActivity" android:configChanges="keyboardHidden|screenSize" />
         <activity android:name=".activity.WeatherDetailsActivity" android:configChanges="keyboardHidden|orientation|screenSize" />
 
         <!-- Maps Android Key-->

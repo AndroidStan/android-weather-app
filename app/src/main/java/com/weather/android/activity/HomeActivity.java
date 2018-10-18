@@ -5,6 +5,7 @@ import com.weather.android.adapter.HomeAdapter;
 import com.weather.android.application.WeatherApplication;
 import com.weather.android.inf.Constants;
 import com.weather.android.to.ErrorMessageTO;
+import com.weather.android.util.KeyboardUtil;
 import com.weather.android.util.RoomUtil;
 import com.weather.android.util.Logger;
 import com.weather.android.util.SystemUtil;
@@ -41,7 +42,7 @@ import java.util.List;
 
 public class HomeActivity extends BaseActivity {
 
-    private ConstraintLayout mainConstraintLayout;
+    //private ConstraintLayout mainConstraintLayout;
     private LinearLayout zipCodeLinearLayout;
     private TextView zipCodeLabel;
     private AutoCompleteTextView autoCompleteTextView;
@@ -180,12 +181,17 @@ public class HomeActivity extends BaseActivity {
 
         }));
 
-	    autoCompleteAdapter = new ArrayAdapter<>(   getApplicationContext(),
-                                                    R.layout.single_line_dropdown,
-                                                    R.id.dropdownLine,
-                                                    WeatherApplication.getSuggestedCitiesZips());
 
-        autoCompleteTextView.setAdapter(autoCompleteAdapter);
+        //if the view is in a portrait mode
+        if(autoCompleteTextView != null) {
+
+            autoCompleteAdapter = new ArrayAdapter<>(getApplicationContext(),
+                    R.layout.single_line_dropdown,
+                    R.id.dropdownLine,
+                    WeatherApplication.getSuggestedCitiesZips());
+
+            autoCompleteTextView.setAdapter(autoCompleteAdapter);
+        }
     }
 
     private void deleteCityListItem(CityDetails cityDetailsToRemove){
@@ -217,82 +223,78 @@ public class HomeActivity extends BaseActivity {
 
         WeatherApplication.setCurrentActivity(this);
 
-        mainConstraintLayout = (ConstraintLayout) findViewById(R.id.constraintLayout);
-
         recyclerView = (RecyclerView) findViewById(R.id.list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), R.drawable.recycler_divider));
 
-        zipCodeLinearLayout = (LinearLayout) findViewById(R.id.zipCodeLinearLayout);
-
-        zipCodeLabel = new TextView(this);
-        zipCodeLabel.setId(R.id.zipCodeLabel);
-        zipCodeLabel.setTextAppearance(R.style.Medium_Bold);
-        zipCodeLabel.setText(R.string.zipCodeLabelText);
-
-        autoCompleteTextView = new AutoCompleteTextView(this);
-        autoCompleteTextView.setId(R.id.enterZipCode);
-        autoCompleteTextView.setThreshold(1);
-        autoCompleteTextView.setTextAppearance(R.style.Medium);
-        autoCompleteTextView.setDropDownBackgroundResource(R.drawable.button_light_blue);
-        autoCompleteTextView.setInputType(InputType.TYPE_CLASS_NUMBER);
-
-        InputFilter[] numSymbolsFilters = new InputFilter[1];
-        numSymbolsFilters[0] = new InputFilter.LengthFilter(5);
-
-        autoCompleteTextView.setFilters(numSymbolsFilters);
-        autoCompleteTextView.setFocusableInTouchMode(true);
-        autoCompleteTextView.setWidth(220);
-
-        addZipButton = (Button) findViewById(R.id.button_add_zip);
-        addZipButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-
-                if(addZipButton.getText().equals(getString(R.string.button_add_zip))){
-                    //the following line is moved here since
-                    //we have flickering issues when used at the
-                    //KeyboardVisibilityEvent code block down
-                    autoCompleteTextView.requestFocus();
-                    SystemUtil.showSoftKeyboard(HomeActivity.this);
-                }else if(addZipButton.getText().equals(getString(R.string.button_hide_zip)))
-                    SystemUtil.hideSoftKeyboard(HomeActivity.this);
-            }
-        });
-
         int orientation = getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE)
-            mainConstraintLayout.removeView(addZipButton);
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            zipCodeLinearLayout = (LinearLayout) findViewById(R.id.zipCodeLinearLayout);
 
-        autoCompleteTextView.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick (AdapterView<?> parent, View view, int position, long id) {
-                Object item = parent.getItemAtPosition(position);
-                Integer zipCode = (Integer) item;
+            zipCodeLabel = new TextView(this);
+            zipCodeLabel.setId(R.id.zipCodeLabel);
+            zipCodeLabel.setTextAppearance(R.style.Medium_Bold);
+            zipCodeLabel.setText(R.string.zipCodeLabelText);
 
-                new AsyncParseTask().execute(   zipCode.toString(),
-                        Constants.GET_CITIES_IDS_BY_SAME_ZIP);
-            }
-        });
+            autoCompleteTextView = new AutoCompleteTextView(this);
+            autoCompleteTextView.setId(R.id.enterZipCode);
+            autoCompleteTextView.setThreshold(1);
+            autoCompleteTextView.setTextAppearance(R.style.Medium);
+            autoCompleteTextView.setDropDownBackgroundResource(R.drawable.button_light_blue);
+            autoCompleteTextView.setInputType(InputType.TYPE_CLASS_NUMBER);
 
-        KeyboardVisibilityEvent.setEventListener(
-                this,
-                new KeyboardVisibilityEventListener() {
-                    @Override
-                    public void onVisibilityChanged(boolean isOpen) {
-                        // some code depending on keyboard visiblity status
-                        if(isOpen){
-                            addZipButton.setText(R.string.button_hide_zip);
-                            zipCodeLinearLayout.addView(zipCodeLabel);
-                            zipCodeLinearLayout.addView(autoCompleteTextView);
-                            //the next line causes severe flickering issues in landscape mode
-                            //autoCompleteTextView.requestFocus();
-                        }else {
-                            addZipButton.setText(R.string.button_add_zip);
-                            zipCodeLinearLayout.removeAllViews();
-                        }
+            InputFilter[] numSymbolsFilters = new InputFilter[1];
+            numSymbolsFilters[0] = new InputFilter.LengthFilter(5);
+
+            autoCompleteTextView.setFilters(numSymbolsFilters);
+            autoCompleteTextView.setFocusableInTouchMode(true);
+            autoCompleteTextView.setWidth(220);
+
+            addZipButton = (Button) findViewById(R.id.button_add_zip);
+            addZipButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+
+                    if (addZipButton.getText().equals(getString(R.string.button_add_zip))) {
+                        addZipButton.setText(R.string.button_hide_zip);
+                        zipCodeLinearLayout.addView(zipCodeLabel);
+                        zipCodeLinearLayout.addView(autoCompleteTextView);
+
+                        KeyboardUtil.showSoftKeyboard(autoCompleteTextView);
+                    } else if (addZipButton.getText().equals(getString(R.string.button_hide_zip))) {
+                        KeyboardUtil.hideSoftKeyboard(HomeActivity.this);
+
+                        addZipButton.setText(R.string.button_add_zip);
+                        zipCodeLinearLayout.removeAllViews();
                     }
-                });
+                }
+            });
+
+            autoCompleteTextView.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Object item = parent.getItemAtPosition(position);
+                    Integer zipCode = (Integer) item;
+
+                    new AsyncParseTask().execute(zipCode.toString(),
+                            Constants.GET_CITIES_IDS_BY_SAME_ZIP);
+                }
+            });
+
+
+            KeyboardVisibilityEvent.setEventListener(
+                    this,
+                    new KeyboardVisibilityEventListener() {
+                        @Override
+                        public void onVisibilityChanged(boolean isOpen) {
+                            // some code depending on keyboard visiblity status
+                            if(!isOpen){
+                                addZipButton.setText(R.string.button_add_zip);
+                                zipCodeLinearLayout.removeAllViews();
+                            }
+                        }
+                    });
+        }
 
 		if(WeatherApplication.getCitiesDetails() == null)
 		    new AsyncParseTask().execute(   Constants.CITIES_INITIAL_ENTRIES_NUM,
@@ -300,17 +302,4 @@ public class HomeActivity extends BaseActivity {
 		else
             setHomeAndAutoCompleteAdapters();
 	}
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            SystemUtil.hideSoftKeyboard(HomeActivity.this);
-            mainConstraintLayout.removeView(addZipButton);
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            mainConstraintLayout.addView(addZipButton);
-        }
-    }
 }
