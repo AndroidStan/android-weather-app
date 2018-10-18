@@ -62,6 +62,7 @@
     <string name="no_db_results">Details not found!</string>
 
     <string name="button_add_zip">ADD ZIP</string>
+    <string name="button_hide_zip">HIDE ZIP</string>
     <string name="weatherLabel">Weather:</string>
     <string name="lastUpdatedTime">Last Updated Time:</string>
     <string name="sunRiseLabelText">Sunrise:</string>

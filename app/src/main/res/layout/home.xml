@@ -10,25 +10,24 @@
     <include
         android:id="@+id/headerLayout"
         layout="@layout/header_layout"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/list"
+        app:layout_constraintBottom_toTopOf="@+id/zipCodeLinearLayout"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <LinearLayout
         android:id="@+id/zipCodeLinearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_horizontal"
         app:layout_constraintVertical_chainStyle="packed"
         app:layout_constraintTop_toBottomOf="@+id/headerLayout"
-        app:layout_constraintBottom_toTopOf="@+id/list" />
+        app:layout_constraintBottom_toTopOf="@+id/list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list"
@@ -40,7 +39,6 @@
         android:layout_marginBottom="8dp"
         android:scrollbars="vertical"
         app:layout_constraintVertical_chainStyle="packed"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/button_add_zip"

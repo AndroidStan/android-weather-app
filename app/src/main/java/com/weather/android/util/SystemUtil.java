@@ -111,6 +111,11 @@ public class SystemUtil {
 		imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,0);
 	}
 
+	public static void hideSoftKeyboard(Activity activity){
+		InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY,0);
+	}
+
 	public static TemperatureTO convertFromKelvinToFahrenheitAndCelcius(Double kelvinTemp){
 		//Conversion temperature formulas following below:
 		//T(°F) = T(K) × 9/5 - 459.67
