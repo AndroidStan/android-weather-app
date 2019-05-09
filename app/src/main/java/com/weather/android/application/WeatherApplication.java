@@ -21,10 +21,12 @@ import android.util.Log;
 import java.util.List;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class WeatherApplication extends Application {
 	
 	private String appPackageName;
